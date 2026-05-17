@@ -1,0 +1,38 @@
+name: X Auto Post (Affiliate)
+
+on:
+  schedule:
+    # Run daily at 9:00 AM JST (00:00 UTC)
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+    inputs:
+      product:
+        description: "Product to promote (overrides secret)"
+        required: false
+      affiliate_url:
+        description: "Affiliate URL (overrides secret)"
+        required: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r x_poster/requirements.txt
+
+      - name: Post affiliate tweet
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          AFFILIATE_PRODUCT: ${{ inputs.product || secrets.AFFILIATE_PRODUCT }}
+          AFFILIATE_URL: ${{ inputs.affiliate_url || secrets.AFFILIATE_URL }}
+        run: python x_poster/poster.py
