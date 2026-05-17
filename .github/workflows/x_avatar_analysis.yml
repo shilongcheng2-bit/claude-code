@@ -1,0 +1,51 @@
+name: X Avatar Analysis
+
+on:
+  workflow_dispatch:
+    inputs:
+      username:
+        description: "X username to analyze (leave blank for authenticated user)"
+        required: false
+        default: ""
+      max_posts:
+        description: "Max posts to fetch (1-3200, default 200)"
+        required: false
+        default: "200"
+  schedule:
+    # Run weekly on Monday at 9:00 AM JST (00:00 UTC)
+    - cron: "0 0 * * 1"
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r x_poster/requirements.txt
+
+      - name: Run avatar analysis
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          X_USERNAME: ${{ inputs.username || '' }}
+          MAX_POSTS: ${{ inputs.max_posts || '200' }}
+          OUTPUT_FILE: avatar_profile.md
+        run: python x_poster/analyzer.py
+
+      - name: Upload avatar profile as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: avatar-profile-${{ github.run_id }}
+          path: avatar_profile.md
+          retention-days: 30
+
+      - name: Display avatar profile
+        run: cat avatar_profile.md
