@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BE ENZYME | 美容特化の酵素食品</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A96E;
+      --gold-light: #E8D5B0;
+      --cream: #FAF6F0;
+      --white: #FFFFFF;
+      --dark: #2C2318;
+      --gray: #6B6560;
+      --pink: #F5EBE5;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.8;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #1a1208 0%, #3a2a14 50%, #2C2318 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 30%, rgba(201,169,110,0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,169,110,0.08) 0%, transparent 60%);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      padding: 6px 20px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(52px, 12vw, 100px);
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: 0.15em;
+      line-height: 1;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(13px, 3vw, 18px);
+      color: var(--gold-light);
+      letter-spacing: 0.3em;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      max-width: 480px;
+      line-height: 2;
+      margin-bottom: 56px;
+      position: relative;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold) 0%, #a8863a 100%);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      padding: 18px 48px;
+      text-decoration: none;
+      transition: opacity 0.3s, transform 0.3s;
+      position: relative;
+    }
+
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.3);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .scroll-hint::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* ── CONCEPT ── */
+    .section { padding: 100px 24px; }
+
+    .container { max-width: 900px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(24px, 5vw, 40px);
+      font-weight: 300;
+      line-height: 1.5;
+      margin-bottom: 32px;
+    }
+
+    .section-text {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 2.2;
+      max-width: 600px;
+    }
+
+    /* ── FEATURES ── */
+    .features-bg {
+      background: var(--dark);
+      padding: 100px 24px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2px;
+      margin-top: 56px;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.04);
+      padding: 48px 36px;
+      border-top: 1px solid rgba(201,169,110,0.3);
+      transition: background 0.3s;
+    }
+
+    .feature-card:hover { background: rgba(201,169,110,0.08); }
+
+    .feature-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 36px;
+      color: rgba(201,169,110,0.3);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .feature-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      color: var(--white);
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+
+    .feature-text {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 2;
+    }
+
+    /* ── INGREDIENTS ── */
+    .ingredients {
+      padding: 100px 24px;
+      background: var(--white);
+    }
+
+    .ingredients-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-top: 56px;
+    }
+
+    @media (max-width: 640px) {
+      .ingredients-layout { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .ingredient-visual {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--gold-light) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ingredient-visual-inner {
+      width: 60%;
+      aspect-ratio: 1;
+      border: 1px solid var(--gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .ingredient-visual-inner span {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+    }
+
+    .ingredient-visual-inner strong {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--dark);
+    }
+
+    .ingredient-list { list-style: none; }
+
+    .ingredient-list li {
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(201,169,110,0.2);
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .ingredient-list li::before {
+      content: '—';
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── PRICE ── */
+    .price-section {
+      background: linear-gradient(135deg, #2C2318 0%, #1a1208 100%);
+      padding: 100px 24px;
+      text-align: center;
+    }
+
+    .price-card {
+      max-width: 480px;
+      margin: 56px auto 0;
+      border: 1px solid rgba(201,169,110,0.4);
+      padding: 64px 48px;
+      position: relative;
+    }
+
+    .price-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, rgba(201,169,110,0.3), transparent, rgba(201,169,110,0.1));
+      z-index: -1;
+    }
+
+    .price-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: 0.2em;
+      margin-bottom: 8px;
+    }
+
+    .price-tag {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--gold);
+      margin: 24px 0 8px;
+    }
+
+    .price-tag span { font-size: 20px; }
+
+    .price-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em;
+      margin-bottom: 40px;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      padding: 16px 40px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-outline:hover {
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    /* ── HOW TO ORDER ── */
+    .how-to {
+      padding: 100px 24px;
+      background: var(--cream);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-top: 56px;
+      counter-reset: step;
+    }
+
+    .step {
+      text-align: center;
+      counter-increment: step;
+    }
+
+    .step-icon {
+      width: 72px;
+      height: 72px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--gold);
+    }
+
+    .step-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .step-text {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 2;
+    }
+
+    /* ── CTA ── */
+    .cta {
+      background: var(--white);
+      padding: 100px 24px;
+      text-align: center;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 48px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 20px;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .footer-note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      line-height: 2;
+    }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      background: var(--pink);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .disclaimer p {
+      font-size: 11px;
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 2;
+    }
+
+    /* ── UTILS ── */
+    .text-gold { color: var(--gold); }
+    .text-white { color: var(--white); }
+    .mt-8 { margin-top: 8px; }
+
+    @media (max-width: 480px) {
+      .price-card { padding: 48px 28px; }
+      .price-tag { font-size: 36px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">BEAUTY ENZYME FOOD</div>
+    <h1>BE <span>ENZYME</span></h1>
+    <p class="hero-sub">美容のために、飲む酵素。</p>
+    <p class="hero-desc">
+      酵素の老舗メーカーと共同開発した、<br />
+      美容特化の酵素食品。<br />
+      内側から輝く素肌へ。
+    </p>
+    <a href="#order" class="btn-primary">今すぐ購入する</a>
+    <div class="scroll-hint">SCROLL</div>
+  </section>
+
+  <!-- CONCEPT -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">CONCEPT</p>
+      <h2 class="section-title">
+        老舗の技術と、<br />美容の革新が出会った。
+      </h2>
+      <p class="section-text">
+        長年にわたり酵素を研究し続けてきたメーカーとの共同開発。<br />
+        美容に特化した独自の配合設計で、毎日の美容習慣をもっとシンプルに、<br />
+        もっと効果的にサポートします。<br /><br />
+        飲むだけで、内側から整える新しいケアを始めましょう。
+      </p>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-bg">
+    <div class="container">
+      <p class="section-label text-gold">FEATURES</p>
+      <h2 class="section-title text-white">BE ENZYMEの<br />3つの特長</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-num">01</div>
+          <h3 class="feature-title">老舗メーカーとの<br />共同開発</h3>
+          <p class="feature-text">
+            長年の実績を持つ酵素の老舗メーカーと<br />
+            二人三脚で開発。確かな品質と<br />
+            安心の製造背景があります。
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">02</div>
+          <h3 class="feature-title">美容特化の<br />独自配合</h3>
+          <p class="feature-text">
+            美容をサポートすることに特化した<br />
+            独自の配合設計。毎日のビューティー<br />
+            ルーティンに取り入れやすい設計。
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">03</div>
+          <h3 class="feature-title">続けやすい<br />飲みやすさ</h3>
+          <p class="feature-text">
+            継続することが大切な酵素ケア。<br />
+            毎日負担なく続けられる<br />
+            飲みやすさにこだわりました。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INGREDIENTS -->
+  <section class="ingredients">
+    <div class="container">
+      <p class="section-label">BEAUTY SUPPORT</p>
+      <h2 class="section-title">美容をサポートする<br />4つのアプローチ</h2>
+      <div class="ingredients-layout">
+        <div class="ingredient-visual">
+          <div class="ingredient-visual-inner">
+            <span>BE</span>
+            <strong>ENZYME</strong>
+            <span>BEAUTY</span>
+          </div>
+        </div>
+        <ul class="ingredient-list">
+          <li>
+            <div>
+              <strong>腸内環境のサポート</strong><br />
+              美容の基本は腸内環境から。酵素が腸のバランス維持をサポートします。
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>代謝をサポート</strong><br />
+              毎日の代謝を内側からサポートし、すっきりとしたコンディションへ。
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>素肌ケアのサポート</strong><br />
+              内側から素肌環境をサポート。毎日のスキンケアをより効果的に。
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>毎日の健康維持</strong><br />
+              日々の健康と美容を両立。忙しい毎日でも手軽に続けられます。
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICE -->
+  <section class="price-section" id="order">
+    <div class="container">
+      <p class="section-label text-gold">PRICE</p>
+      <h2 class="section-title text-white">シンプルな<br />1プラン</h2>
+      <div class="price-card">
+        <p class="price-name">BE ENZYME</p>
+        <p style="font-size:12px; color:rgba(255,255,255,0.4); letter-spacing:0.2em;">1個</p>
+        <p class="price-tag"><span>¥</span>7,560<span style="font-size:14px;">（税込）</span></p>
+        <p class="price-note">送料別途 / 在庫状況によりお届けまで数日いただく場合があります</p>
+        <a href="#contact" class="btn-outline">購入する</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO ORDER -->
+  <section class="how-to" id="contact">
+    <div class="container">
+      <p class="section-label">HOW TO ORDER</p>
+      <h2 class="section-title">ご購入方法</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-icon">1</div>
+          <h3 class="step-title">Instagramをフォロー</h3>
+          <p class="step-text">
+            公式Instagramアカウントを<br />フォローしてください。
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-icon">2</div>
+          <h3 class="step-title">DMでご連絡</h3>
+          <p class="step-text">
+            「BE ENZYME購入希望」と<br />
+            ダイレクトメッセージをお送りください。
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-icon">3</div>
+          <h3 class="step-title">お支払い</h3>
+          <p class="step-text">
+            ご案内に従いお支払いください。<br />
+            各種決済方法に対応予定です。
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-icon">4</div>
+          <h3 class="step-title">発送・お届け</h3>
+          <p class="step-text">
+            確認後、速やかに発送いたします。<br />
+            到着までしばらくお待ちください。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <p class="section-label">START YOUR JOURNEY</p>
+      <h2 class="section-title">内側から、美しく。</h2>
+      <p class="section-text" style="margin: 0 auto; text-align:center;">
+        まずはInstagramで最新情報をチェック。<br />
+        ご不明な点はお気軽にDMにてお問い合わせください。
+      </p>
+      <div class="cta-buttons">
+        <a href="#" class="btn-primary">Instagramをフォロー</a>
+        <a href="#order" class="btn-outline" style="color:var(--dark); border-color:var(--dark);">購入ページへ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <p>
+      ※本製品は食品です。医薬品ではありません。疾病の診断、治療、予防を目的としたものではありません。<br />
+      ※効果・効能には個人差があります。<br />
+      ※妊娠・授乳中の方、お薬を服用中の方は医師にご相談の上ご利用ください。
+    </p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">BE ENZYME</div>
+    <p class="footer-note">
+      © 2026 BE ENZYME. All rights reserved.<br />
+      お問い合わせはInstagram DMまたは公式ページよりお願いいたします。
+    </p>
+  </footer>
+
+</body>
+</html>
