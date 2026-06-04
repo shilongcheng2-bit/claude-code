@@ -20,6 +20,7 @@
       --radius: 16px;
     }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
       background: var(--bg);
@@ -27,7 +28,7 @@
       min-height: 100vh;
     }
 
-    /* ========== HERO ========== */
+    /* ===== HERO ===== */
     #screen-hero {
       background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f2d5e 100%);
       min-height: 100vh;
@@ -40,394 +41,118 @@
       position: relative;
       overflow: hidden;
     }
-
     #screen-hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E") repeat;
-      background-size: 80px 80px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='30' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E") repeat;
     }
-
-    .hero-emoji {
-      font-size: 80px;
-      margin-bottom: 20px;
-      animation: float 3s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-
-    .hero-title {
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.2;
-      margin-bottom: 16px;
-    }
+    .hero-emoji { font-size: 80px; margin-bottom: 20px; animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+    .hero-title { font-size: clamp(2rem,6vw,3.5rem); font-weight: 900; color: #fff; line-height: 1.2; margin-bottom: 16px; }
     .hero-title span { color: var(--accent); }
-
-    .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
-      color: #94a3b8;
-      max-width: 500px;
-      margin-bottom: 40px;
-      line-height: 1.7;
-    }
-
+    .hero-sub { font-size: clamp(1rem,2.5vw,1.2rem); color: #94a3b8; max-width: 500px; margin-bottom: 40px; line-height: 1.7; }
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), #ef4444);
-      color: #fff;
-      border: none;
-      padding: 18px 48px;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 8px 32px rgba(245,158,11,0.4);
+      color: #fff; border: none; padding: 18px 48px; border-radius: 50px;
+      font-size: 1.1rem; font-weight: 700; cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 8px 32px rgba(245,158,11,.4);
     }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(245,158,11,0.5); }
-    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(245,158,11,.5); }
+    .hero-badges { display: flex; gap: 12px; margin-top: 48px; flex-wrap: wrap; justify-content: center; }
+    .badge { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); color: #cbd5e1; padding: 8px 18px; border-radius: 50px; font-size: .85rem; }
 
-    .hero-badges {
-      display: flex;
-      gap: 12px;
-      margin-top: 48px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .badge {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: #cbd5e1;
-      padding: 8px 18px;
-      border-radius: 50px;
-      font-size: 0.85rem;
-    }
-
-    /* ========== QUIZ ========== */
-    #screen-quiz {
-      display: none;
-      min-height: 100vh;
-      padding: 20px;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-
-    .quiz-wrapper {
-      width: 100%;
-      max-width: 680px;
-    }
-
-    .progress-bar-track {
-      background: var(--border);
-      height: 6px;
-      border-radius: 3px;
-      margin-bottom: 32px;
-      overflow: hidden;
-    }
-    .progress-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      border-radius: 3px;
-      transition: width 0.4s ease;
-    }
-
-    .step-label {
-      text-align: center;
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .question-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 40px;
-      box-shadow: 0 4px 40px rgba(0,0,0,0.08);
-      animation: slideIn 0.35s ease;
-    }
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
+    /* ===== QUIZ ===== */
+    #screen-quiz { display: none; min-height: 100vh; padding: 20px; align-items: center; justify-content: center; flex-direction: column; }
+    .quiz-wrapper { width: 100%; max-width: 680px; }
+    .progress-bar-track { background: var(--border); height: 6px; border-radius: 3px; margin-bottom: 32px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 3px; transition: width .4s ease; }
+    .step-label { text-align: center; font-size: .9rem; color: var(--muted); margin-bottom: 8px; }
+    .question-card { background: var(--card); border-radius: var(--radius); padding: 40px; box-shadow: 0 4px 40px rgba(0,0,0,.08); animation: slideIn .35s ease; }
+    @keyframes slideIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
     .q-icon { font-size: 48px; text-align: center; margin-bottom: 16px; }
-    .q-text {
-      font-size: 1.3rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 8px;
-      line-height: 1.5;
-    }
-    .q-hint {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-bottom: 28px;
-    }
-
-    .options-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+    .q-text { font-size: 1.3rem; font-weight: 700; text-align: center; margin-bottom: 8px; line-height: 1.5; }
+    .q-hint { text-align: center; color: var(--muted); font-size: .9rem; margin-bottom: 28px; }
+    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .options-grid.cols-1 { grid-template-columns: 1fr; }
     .options-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
-
+    .options-grid.cols-5 { grid-template-columns: 1fr 1fr; }
     .option-btn {
-      background: #f8fafc;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
+      background: #f8fafc; border: 2px solid var(--border); border-radius: 12px;
+      padding: 16px 12px; cursor: pointer; transition: all .2s;
+      text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px;
     }
-    .option-btn:hover {
-      border-color: var(--primary-light);
-      background: #eff6ff;
-      transform: translateY(-2px);
-    }
-    .option-btn.selected {
-      border-color: var(--primary);
-      background: #eff6ff;
-      box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
-    }
+    .option-btn:hover { border-color: var(--primary-light); background: #eff6ff; transform: translateY(-2px); }
+    .option-btn.selected { border-color: var(--primary); background: #eff6ff; box-shadow: 0 0 0 3px rgba(37,99,235,.15); }
     .option-emoji { font-size: 28px; }
-    .option-label { font-size: 0.9rem; font-weight: 600; color: var(--text); }
-    .option-desc  { font-size: 0.75rem; color: var(--muted); }
-
-    .quiz-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 28px;
-    }
-    .btn-back {
-      background: none;
-      border: 2px solid var(--border);
-      border-radius: 50px;
-      padding: 12px 28px;
-      font-size: 0.95rem;
-      cursor: pointer;
-      color: var(--muted);
-      transition: all 0.2s;
-    }
+    .option-label { font-size: .9rem; font-weight: 600; color: var(--text); }
+    .option-desc  { font-size: .75rem; color: var(--muted); }
+    .quiz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; }
+    .btn-back { background: none; border: 2px solid var(--border); border-radius: 50px; padding: 12px 28px; font-size: .95rem; cursor: pointer; color: var(--muted); transition: all .2s; }
     .btn-back:hover { border-color: var(--muted); color: var(--text); }
-
-    .btn-next {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 50px;
-      padding: 12px 32px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      opacity: 0.4;
-      pointer-events: none;
-    }
+    .btn-next { background: var(--primary); color: #fff; border: none; border-radius: 50px; padding: 12px 32px; font-size: .95rem; font-weight: 700; cursor: pointer; transition: all .2s; opacity: .4; pointer-events: none; }
     .btn-next.active { opacity: 1; pointer-events: auto; }
     .btn-next.active:hover { background: #1d4ed8; transform: translateY(-2px); }
 
-    /* ========== LOADING ========== */
-    #screen-loading {
-      display: none;
-      min-height: 100vh;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 20px;
-      background: linear-gradient(135deg, #0f172a, #1e3a5f);
-    }
-    .loading-globe {
-      font-size: 80px;
-      animation: spin 2s linear infinite;
-      display: block;
-      margin-bottom: 24px;
-    }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
+    /* ===== LOADING ===== */
+    #screen-loading { display: none; min-height: 100vh; align-items: center; justify-content: center; flex-direction: column; text-align: center; padding: 20px; background: linear-gradient(135deg, #0f172a, #1e3a5f); }
+    .loading-globe { font-size: 80px; animation: spin 2s linear infinite; display: block; margin-bottom: 24px; }
+    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
     #screen-loading h2 { color: #fff; font-size: 1.4rem; margin-bottom: 8px; }
     #screen-loading p  { color: #94a3b8; }
+    .loading-dots span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); margin: 0 4px; animation: bounce 1.4s infinite ease-in-out; }
+    .loading-dots span:nth-child(1){animation-delay:0s}
+    .loading-dots span:nth-child(2){animation-delay:.2s}
+    .loading-dots span:nth-child(3){animation-delay:.4s}
+    @keyframes bounce { 0%,80%,100%{transform:scale(0)} 40%{transform:scale(1)} }
 
-    .loading-dots span {
-      display: inline-block;
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      margin: 0 4px;
-      animation: bounce 1.4s infinite ease-in-out;
-    }
-    .loading-dots span:nth-child(1) { animation-delay: 0s; }
-    .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-    .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes bounce {
-      0%, 80%, 100% { transform: scale(0); }
-      40% { transform: scale(1); }
-    }
-
-    /* ========== RESULTS ========== */
-    #screen-result {
-      display: none;
-      padding: 40px 20px;
-      min-height: 100vh;
-    }
-
-    .result-header {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 48px;
-    }
-    .result-header h1 {
-      font-size: clamp(1.8rem, 5vw, 2.5rem);
-      font-weight: 900;
-      margin-bottom: 12px;
-    }
+    /* ===== RESULTS ===== */
+    #screen-result { display: none; padding: 40px 20px; min-height: 100vh; }
+    .result-header { text-align: center; max-width: 700px; margin: 0 auto 48px; }
+    .result-header h1 { font-size: clamp(1.8rem,5vw,2.5rem); font-weight: 900; margin-bottom: 12px; }
     .result-header p { color: var(--muted); font-size: 1.05rem; }
-
-    .results-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 24px;
-      max-width: 1100px;
-      margin: 0 auto 48px;
+    .results-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(320px,1fr)); gap: 24px; max-width: 1100px; margin: 0 auto 48px; }
+    .dest-card { background: var(--card); border-radius: var(--radius); overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,.08); transition: transform .25s, box-shadow .25s; animation: fadeUp .5s ease both; }
+    .dest-card:hover { transform: translateY(-6px); box-shadow: 0 12px 48px rgba(0,0,0,.14); }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    .dest-card:nth-child(1){animation-delay:.1s}
+    .dest-card:nth-child(2){animation-delay:.2s}
+    .dest-card:nth-child(3){animation-delay:.3s}
+    .dest-banner { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 64px; position: relative; }
+    .rank-badge { position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,.5); color: #fff; font-size: .75rem; font-weight: 700; padding: 4px 12px; border-radius: 50px; }
+    .rank-badge.gold   { background: linear-gradient(135deg,#f59e0b,#d97706); }
+    .rank-badge.silver { background: linear-gradient(135deg,#94a3b8,#64748b); }
+    .rank-badge.bronze { background: linear-gradient(135deg,#b45309,#92400e); }
+    .match-badge { position: absolute; top: 12px; right: 12px; background: var(--success); color: #fff; font-size: .8rem; font-weight: 700; padding: 4px 12px; border-radius: 50px; }
+    .dest-body { padding: 22px; }
+    .dest-name { font-size: 1.35rem; font-weight: 800; margin-bottom: 2px; }
+    .dest-country { color: var(--muted); font-size: .88rem; margin-bottom: 10px; }
+    .dest-desc { font-size: .88rem; line-height: 1.7; color: #475569; margin-bottom: 12px; }
+    .reason-box {
+      background: #fff9ed;
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      font-size: .84rem;
+      color: #78350f;
+      line-height: 1.6;
     }
-
-    .dest-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-      transition: transform 0.25s, box-shadow 0.25s;
-      animation: fadeUp 0.5s ease both;
-    }
-    .dest-card:hover { transform: translateY(-6px); box-shadow: 0 12px 48px rgba(0,0,0,0.14); }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .dest-card:nth-child(1) { animation-delay: 0.1s; }
-    .dest-card:nth-child(2) { animation-delay: 0.2s; }
-    .dest-card:nth-child(3) { animation-delay: 0.3s; }
-
-    .dest-banner {
-      height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 72px;
-      position: relative;
-    }
-    .rank-badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: rgba(0,0,0,0.5);
-      color: #fff;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 50px;
-    }
-    .rank-badge.gold   { background: linear-gradient(135deg, #f59e0b, #d97706); }
-    .rank-badge.silver { background: linear-gradient(135deg, #94a3b8, #64748b); }
-    .rank-badge.bronze { background: linear-gradient(135deg, #b45309, #92400e); }
-
-    .match-badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: var(--success);
-      color: #fff;
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 50px;
-    }
-
-    .dest-body { padding: 24px; }
-    .dest-name {
-      font-size: 1.4rem;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-    .dest-country {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .dest-desc {
-      font-size: 0.92rem;
-      line-height: 1.7;
-      color: #475569;
-      margin-bottom: 16px;
-    }
-
-    .dest-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-    .tag {
-      background: #f1f5f9;
-      border-radius: 50px;
-      padding: 4px 12px;
-      font-size: 0.78rem;
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    .dest-meta {
-      border-top: 1px solid var(--border);
-      padding-top: 14px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .meta-item { font-size: 0.82rem; }
+    .reason-box strong { display: block; font-size: .78rem; color: var(--accent); margin-bottom: 2px; }
+    .dest-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .tag { background: #f1f5f9; border-radius: 50px; padding: 4px 12px; font-size: .78rem; color: var(--primary); font-weight: 600; }
+    .dest-meta { border-top: 1px solid var(--border); padding-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .meta-item { font-size: .82rem; }
     .meta-label { color: var(--muted); display: block; margin-bottom: 2px; }
     .meta-value { font-weight: 600; }
-
-    .result-actions {
-      text-align: center;
-      padding-bottom: 40px;
-    }
-    .btn-retry {
-      background: none;
-      border: 2px solid var(--primary);
-      color: var(--primary);
-      border-radius: 50px;
-      padding: 14px 36px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+    .result-actions { text-align: center; padding-bottom: 40px; }
+    .btn-retry { background: none; border: 2px solid var(--primary); color: var(--primary); border-radius: 50px; padding: 14px 36px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all .2s; }
     .btn-retry:hover { background: var(--primary); color: #fff; }
-
     .screen { display: flex; }
 
-    @media (max-width: 520px) {
-      .options-grid { grid-template-columns: 1fr; }
-      .options-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+    @media (max-width:520px) {
+      .options-grid,.options-grid.cols-3,.options-grid.cols-5 { grid-template-columns: 1fr 1fr; }
       .question-card { padding: 24px 18px; }
       .results-grid { grid-template-columns: 1fr; }
     }
@@ -435,29 +160,25 @@
 </head>
 <body>
 
-<!-- ===== HERO ===== -->
+<!-- HERO -->
 <section id="screen-hero" class="screen">
   <div class="hero-emoji">✈️</div>
   <h1 class="hero-title">あなたにぴったりの<br /><span>国外旅行先</span>を診断</h1>
   <p class="hero-sub">いくつかの質問に答えるだけで、あなたの好みや旅スタイルに合った海外旅行先をご提案します。</p>
   <button class="btn-primary" onclick="startQuiz()">診断スタート →</button>
   <div class="hero-badges">
-    <span class="badge">🌍 20以上の旅行先</span>
-    <span class="badge">❓ 6つの質問</span>
+    <span class="badge">🌍 50の旅行先から診断</span>
+    <span class="badge">❓ 7つの質問</span>
     <span class="badge">⚡ 約2分で完了</span>
   </div>
 </section>
 
-<!-- ===== QUIZ ===== -->
+<!-- QUIZ -->
 <section id="screen-quiz" class="screen">
   <div class="quiz-wrapper">
-    <div class="step-label" id="step-label">質問 1 / 6</div>
-    <div class="progress-bar-track">
-      <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
-    </div>
-    <div class="question-card" id="question-card">
-      <!-- dynamically filled -->
-    </div>
+    <div class="step-label" id="step-label">質問 1 / 7</div>
+    <div class="progress-bar-track"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+    <div class="question-card" id="question-card"></div>
     <div class="quiz-nav">
       <button class="btn-back" id="btn-back" onclick="prevStep()">← 戻る</button>
       <button class="btn-next" id="btn-next" onclick="nextStep()">次へ →</button>
@@ -465,17 +186,15 @@
   </div>
 </section>
 
-<!-- ===== LOADING ===== -->
+<!-- LOADING -->
 <section id="screen-loading" class="screen">
   <span class="loading-globe">🌐</span>
   <h2>旅先を診断中…</h2>
-  <p style="margin-bottom:24px">あなたにぴったりの旅先を探しています</p>
-  <div class="loading-dots">
-    <span></span><span></span><span></span>
-  </div>
+  <p style="margin-bottom:24px">50の旅行先からあなたにぴったりを探しています</p>
+  <div class="loading-dots"><span></span><span></span><span></span></div>
 </section>
 
-<!-- ===== RESULT ===== -->
+<!-- RESULT -->
 <section id="screen-result" class="screen">
   <div class="result-header">
     <h1>🎉 あなたへのおすすめ旅行先</h1>
@@ -488,7 +207,7 @@
 </section>
 
 <script>
-// ========== DATA ==========
+// ===== QUESTIONS =====
 const QUESTIONS = [
   {
     id: 'style',
@@ -496,10 +215,10 @@ const QUESTIONS = [
     text: 'どんな旅のスタイルが好きですか？',
     hint: '最も近いものを選んでください',
     options: [
-      { emoji: '🏖️', label: 'ビーチ・リゾート', desc: '海、砂浜、のんびり', value: 'beach' },
-      { emoji: '🏛️', label: '文化・歴史探訪', desc: '遺跡、博物館、街歩き', value: 'culture' },
-      { emoji: '🏔️', label: '自然・アドベンチャー', desc: '山、秘境、アクティビティ', value: 'nature' },
-      { emoji: '🍜', label: 'グルメ旅', desc: '食、市場、レストラン', value: 'food' },
+      { emoji:'🏖️', label:'ビーチ・リゾート', desc:'海、砂浜、のんびり', value:'beach' },
+      { emoji:'🏛️', label:'文化・歴史探訪', desc:'遺跡、博物館、街歩き', value:'culture' },
+      { emoji:'🏔️', label:'自然・アドベンチャー', desc:'山、秘境、アクティビティ', value:'nature' },
+      { emoji:'🍜', label:'グルメ旅', desc:'食、市場、レストラン', value:'food' },
     ],
   },
   {
@@ -508,10 +227,10 @@ const QUESTIONS = [
     text: '好きな気候はどれですか？',
     hint: '旅先での天候の好みを教えてください',
     options: [
-      { emoji: '☀️', label: '暑い・熱帯', desc: '南国、常夏', value: 'tropical' },
-      { emoji: '🌤️', label: '温暖・過ごしやすい', desc: '春秋のような気候', value: 'mild' },
-      { emoji: '❄️', label: '涼しい・寒い', desc: '雪景色、冷涼な空気', value: 'cold' },
-      { emoji: '🍂', label: '四季がある', desc: '季節感を楽しみたい', value: 'seasonal' },
+      { emoji:'☀️', label:'暑い・熱帯', desc:'南国、常夏', value:'tropical' },
+      { emoji:'🌤️', label:'温暖・過ごしやすい', desc:'春秋のような気候', value:'mild' },
+      { emoji:'❄️', label:'涼しい・寒い', desc:'雪景色、冷涼な空気', value:'cold' },
+      { emoji:'🍂', label:'四季がある', desc:'季節感を楽しみたい', value:'seasonal' },
     ],
   },
   {
@@ -520,10 +239,10 @@ const QUESTIONS = [
     text: '旅行の一番の目的は？',
     hint: '旅でいちばん重視することを教えてください',
     options: [
-      { emoji: '😌', label: 'リラックス', desc: '日常から離れてのんびり', value: 'relax' },
-      { emoji: '🔥', label: '刺激・冒険', desc: '非日常体験、スリル', value: 'adventure' },
-      { emoji: '📸', label: '絶景・インスタ映え', desc: '写真に残したい風景', value: 'scenery' },
-      { emoji: '🤝', label: '文化・人との交流', desc: '現地文化に触れたい', value: 'exchange' },
+      { emoji:'😌', label:'リラックス', desc:'日常から離れてのんびり', value:'relax' },
+      { emoji:'🔥', label:'刺激・冒険', desc:'非日常体験、スリル', value:'adventure' },
+      { emoji:'📸', label:'絶景・インスタ映え', desc:'写真に残したい風景', value:'scenery' },
+      { emoji:'🤝', label:'文化・人との交流', desc:'現地文化に触れたい', value:'exchange' },
     ],
   },
   {
@@ -532,9 +251,9 @@ const QUESTIONS = [
     text: '旅行の予算感はどのくらいですか？',
     hint: '1人あたりの旅行総予算（航空券込み）の目安',
     options: [
-      { emoji: '🪙', label: '節約重視', desc: '20万円以下', value: 'budget' },
-      { emoji: '💴', label: 'バランス重視', desc: '20〜40万円', value: 'moderate' },
-      { emoji: '💎', label: '贅沢に楽しみたい', desc: '40万円以上', value: 'luxury' },
+      { emoji:'🪙', label:'節約重視', desc:'20万円以下', value:'budget' },
+      { emoji:'💴', label:'バランス重視', desc:'20〜40万円', value:'moderate' },
+      { emoji:'💎', label:'贅沢に楽しみたい', desc:'40万円以上', value:'luxury' },
     ],
   },
   {
@@ -543,9 +262,9 @@ const QUESTIONS = [
     text: '旅行の期間はどのくらいを想定していますか？',
     hint: '渡航日数の目安を教えてください',
     options: [
-      { emoji: '⚡', label: '短め（3〜5日）', desc: '週末〜ショートトリップ', value: 'short' },
-      { emoji: '✈️', label: '普通（1週間前後）', desc: 'ゴールデンウィーク等', value: 'week' },
-      { emoji: '🌍', label: '長め（2週間以上）', desc: 'じっくり旅したい', value: 'long' },
+      { emoji:'⚡', label:'短め（3〜5日）', desc:'週末〜ショートトリップ', value:'short' },
+      { emoji:'✈️', label:'普通（1週間前後）', desc:'ゴールデンウィーク等', value:'week' },
+      { emoji:'🌍', label:'長め（2週間以上）', desc:'じっくり旅したい', value:'long' },
     ],
   },
   {
@@ -554,283 +273,483 @@ const QUESTIONS = [
     text: '誰と旅行しますか？',
     hint: '旅の同行者を教えてください',
     options: [
-      { emoji: '🧳', label: '一人旅', desc: '自由気ままに', value: 'solo' },
-      { emoji: '💑', label: 'カップル・夫婦', desc: '二人でロマンチックに', value: 'couple' },
-      { emoji: '👨‍👩‍👧', label: '家族（子連れ）', desc: '子どもと一緒に', value: 'family' },
-      { emoji: '🎉', label: '友人グループ', desc: 'みんなで楽しく', value: 'friends' },
+      { emoji:'🧳', label:'一人旅', desc:'自由気ままに', value:'solo' },
+      { emoji:'💑', label:'カップル・夫婦', desc:'二人でロマンチックに', value:'couple' },
+      { emoji:'👨‍👩‍👧', label:'家族（子連れ）', desc:'子どもと一緒に', value:'family' },
+      { emoji:'🎉', label:'友人グループ', desc:'みんなで楽しく', value:'friends' },
+    ],
+  },
+  {
+    id: 'occupation',
+    icon: '💼',
+    text: 'あなたの現在の状況は？',
+    hint: '旅行の計画に合わせて最適な旅先を提案します',
+    options: [
+      { emoji:'🎓', label:'学生', desc:'長期休暇を活用したい', value:'student' },
+      { emoji:'💼', label:'社会人（若手）', desc:'20〜30代、限られた有休で', value:'worker_young' },
+      { emoji:'👔', label:'社会人（ベテラン）', desc:'40代以上、質重視で', value:'worker_senior' },
+      { emoji:'🖥️', label:'フリーランス・リモート', desc:'時間の融通が利く', value:'freelance' },
+      { emoji:'🏠', label:'主婦・主夫', desc:'家族や自分の時間を大切に', value:'homemaker' },
     ],
   },
 ];
 
-// Destination database
+// ===== DESTINATIONS (50) =====
 const DESTINATIONS = [
+  // ---- ASIA ----
   {
-    id: 'bali',
-    name: 'バリ島',
-    country: '🇮🇩 インドネシア',
-    emoji: '🌴',
-    bg: 'linear-gradient(135deg, #064e3b, #065f46)',
-    desc: 'エメラルドの海と神秘的なヒンドゥー文化が融合した「神々の島」。ウブドの棚田、テンプル、サーフィン、スパが揃うオールラウンドリゾート。',
-    tags: ['ビーチ', '文化', 'スパ', 'サーフィン'],
-    bestTime: '4月〜10月',
-    budget: '中程度',
-    duration: '5〜10日',
-    scores: { style: { beach: 3, food: 2, culture: 2 }, climate: { tropical: 3 }, purpose: { relax: 3, scenery: 2 }, budget: { budget: 2, moderate: 3 }, companion: { couple: 3, friends: 2, solo: 2 } },
+    id:'bali', name:'バリ島', country:'🇮🇩 インドネシア', emoji:'🌴',
+    bg:'linear-gradient(135deg,#064e3b,#065f46)',
+    desc:'エメラルドの海と神秘的なヒンドゥー文化が融合した「神々の島」。ウブドの棚田、テンプル、サーフィン、スパが揃うオールラウンドリゾート。',
+    highlight:'ビーチとスパで完全リセット。コスパよく極上の癒しを得られる。',
+    tags:['ビーチ','文化','スパ','サーフィン'], bestTime:'4〜10月', budget:'中程度', duration:'5〜10日',
+    scores:{ style:{beach:3,food:2,culture:2}, climate:{tropical:3}, purpose:{relax:3,scenery:2}, budget:{budget:2,moderate:3}, companion:{couple:3,friends:2,solo:2}, occupation:{student:2,worker_young:3,freelance:2,homemaker:2} },
   },
   {
-    id: 'paris',
-    name: 'パリ',
-    country: '🇫🇷 フランス',
-    emoji: '🗼',
-    bg: 'linear-gradient(135deg, #1e1b4b, #312e81)',
-    desc: 'エッフェル塔、ルーブル美術館、ヴェルサイユ宮殿…世界最高峰の芸術と食文化が集まる「光の都」。どこを歩いても絵になる街並み。',
-    tags: ['芸術', '食', 'ファッション', '歴史'],
-    bestTime: '4〜6月、9〜11月',
-    budget: '高め',
-    duration: '5〜10日',
-    scores: { style: { culture: 3, food: 3 }, climate: { mild: 3, seasonal: 2 }, purpose: { scenery: 3, exchange: 2 }, budget: { moderate: 2, luxury: 3 }, companion: { couple: 3, friends: 2 } },
+    id:'thailand', name:'タイ', country:'🇹🇭 タイ', emoji:'🛕',
+    bg:'linear-gradient(135deg,#78350f,#92400e)',
+    desc:'黄金の寺院、屋台グルメ、白砂ビーチ、象と触れ合う体験…コスパ最強の旅先。バンコクの喧騒もチェンマイの癒しも楽しめる多彩な国。',
+    highlight:'アジア最高峰のコスパ。少ない予算でも満足度が非常に高い。',
+    tags:['グルメ','ビーチ','寺院','コスパ◎'], bestTime:'11〜2月', budget:'低め', duration:'5〜14日',
+    scores:{ style:{food:3,beach:2,culture:2}, climate:{tropical:3}, purpose:{relax:2,exchange:2}, budget:{budget:3}, companion:{solo:3,friends:3,couple:2}, occupation:{student:3,worker_young:3,freelance:2} },
   },
   {
-    id: 'iceland',
-    name: 'アイスランド',
-    country: '🇮🇸 アイスランド',
-    emoji: '🌋',
-    bg: 'linear-gradient(135deg, #0c4a6e, #075985)',
-    desc: 'オーロラ、間欠泉、溶岩台地、氷河……地球の鼓動を感じられる唯一無二の絶景大国。世界で最も非日常を体感できる旅先のひとつ。',
-    tags: ['オーロラ', '絶景', '自然', '秘境'],
-    bestTime: '9〜3月（オーロラ）',
-    budget: '高め',
-    duration: '7〜14日',
-    scores: { style: { nature: 3 }, climate: { cold: 3 }, purpose: { adventure: 3, scenery: 3 }, budget: { luxury: 2, moderate: 2 }, companion: { couple: 2, friends: 2, solo: 2 } },
+    id:'vietnam', name:'ベトナム', country:'🇻🇳 ベトナム', emoji:'🏮',
+    bg:'linear-gradient(135deg,#7f1d1d,#991b1b)',
+    desc:'フォー、バインミー…アジア屈指のグルメ大国。ハロン湾の奇岩、ホイアンの旧市街、バイクで溢れるハノイの路地裏が旅心をくすぐる。',
+    highlight:'グルメと世界遺産が驚きの安さで楽しめる。食好きに必須の旅先。',
+    tags:['グルメ','世界遺産','旧市街','コスパ◎'], bestTime:'11〜4月（南部）', budget:'低め', duration:'7〜14日',
+    scores:{ style:{food:3,culture:2}, climate:{tropical:2}, purpose:{exchange:3,scenery:2}, budget:{budget:3}, companion:{solo:2,friends:3,couple:2}, occupation:{student:3,worker_young:2,freelance:3} },
   },
   {
-    id: 'thailand',
-    name: 'タイ',
-    country: '🇹🇭 タイ',
-    emoji: '🛕',
-    bg: 'linear-gradient(135deg, #78350f, #92400e)',
-    desc: '黄金の寺院、屋台グルメ、白砂ビーチ、象と触れ合う体験…コスパ最強の旅先。バンコクの喧騒もチェンマイの癒しも楽しめる多彩な国。',
-    tags: ['グルメ', 'ビーチ', '寺院', 'コスパ◎'],
-    bestTime: '11〜2月',
-    budget: '低め',
-    duration: '5〜14日',
-    scores: { style: { food: 3, beach: 2, culture: 2 }, climate: { tropical: 3 }, purpose: { relax: 2, exchange: 2 }, budget: { budget: 3 }, companion: { solo: 3, friends: 3, couple: 2 } },
+    id:'seoul', name:'ソウル', country:'🇰🇷 韓国', emoji:'🏙️',
+    bg:'linear-gradient(135deg,#4c1d95,#5b21b6)',
+    desc:'焼肉、チキン、チムジルバン、Kコスメ…近くて便利な隣国。短期旅行に最適で、明洞・弘大・益善洞など観光スポットも充実。',
+    highlight:'フライト2時間以内。短い休みでも十分楽しめる最高のコスパ旅先。',
+    tags:['グルメ','Kカルチャー','コスメ','コスパ◎'], bestTime:'3〜5月、9〜11月', budget:'低め', duration:'3〜5日',
+    scores:{ style:{food:3,culture:2}, climate:{seasonal:3,mild:1}, purpose:{exchange:2,scenery:1}, budget:{budget:3}, duration:{short:3}, companion:{friends:3,couple:3,solo:2}, occupation:{student:3,worker_young:3,worker_senior:2} },
   },
   {
-    id: 'italy',
-    name: 'イタリア',
-    country: '🇮🇹 イタリア',
-    emoji: '🍕',
-    bg: 'linear-gradient(135deg, #166534, #15803d)',
-    desc: 'ローマ、ヴェネツィア、フィレンツェ…古代遺跡と芸術の宝庫。世界最高峰のパスタ、ピザ、ジェラートで食の旅も最高。',
-    tags: ['歴史', 'グルメ', '芸術', 'ゴンドラ'],
-    bestTime: '4〜6月、9〜10月',
-    budget: '中〜高め',
-    duration: '7〜14日',
-    scores: { style: { culture: 3, food: 3 }, climate: { mild: 3 }, purpose: { scenery: 2, exchange: 2, relax: 2 }, budget: { moderate: 3, luxury: 2 }, companion: { couple: 3, family: 2, friends: 2 } },
+    id:'taiwan', name:'台湾（台北）', country:'🇹🇼 台湾', emoji:'🫖',
+    bg:'linear-gradient(135deg,#0369a1,#0284c7)',
+    desc:'夜市のグルメ、九份の幻想的な街並み、親切な人々…日本から近くて言葉の壁も低め。台湾茶・小籠包・鶏排など食文化も抜群。',
+    highlight:'日本から最短1.5時間。治安もよく初海外にも最適なお隣の楽園。',
+    tags:['夜市','グルメ','近場','治安良好'], bestTime:'10〜4月', budget:'低め', duration:'3〜7日',
+    scores:{ style:{food:3,culture:2}, climate:{mild:2,tropical:1}, purpose:{exchange:3,relax:1}, budget:{budget:3}, duration:{short:3}, companion:{friends:3,couple:2,solo:3,family:2}, occupation:{student:3,worker_young:3,worker_senior:2,homemaker:2} },
   },
   {
-    id: 'newzealand',
-    name: 'ニュージーランド',
-    country: '🇳🇿 ニュージーランド',
-    emoji: '🏔️',
-    bg: 'linear-gradient(135deg, #134e4a, #0f766e)',
-    desc: '壮大なフィヨルド、緑の牧草地、バンジージャンプ発祥地。ロードオブザリングの世界に迷い込んだような圧倒的な自然体験ができる。',
-    tags: ['アドベンチャー', '絶景', '自然', 'アクティビティ'],
-    bestTime: '12〜2月（現地夏）',
-    budget: '高め',
-    duration: '10〜21日',
-    scores: { style: { nature: 3 }, climate: { mild: 2, cold: 2 }, purpose: { adventure: 3, scenery: 3 }, budget: { moderate: 2, luxury: 2 }, duration: { long: 3 }, companion: { friends: 3, couple: 2, solo: 2 } },
+    id:'singapore', name:'シンガポール', country:'🇸🇬 シンガポール', emoji:'🌆',
+    bg:'linear-gradient(135deg,#0f4c81,#1565c0)',
+    desc:'マリーナベイサンズ、ガーデンズバイザベイ、ホーカーセンターのチキンライス…コンパクトで清潔。英語が使えて治安もよく初海外・家族連れに最適。',
+    highlight:'英語OK・治安◎・清潔。はじめての海外でも安心して楽しめる。',
+    tags:['近代都市','グルメ','安全','初心者向け'], bestTime:'年中（雨季に注意）', budget:'中程度', duration:'3〜5日',
+    scores:{ style:{food:3,culture:1}, climate:{tropical:3}, purpose:{relax:1,exchange:2,scenery:1}, budget:{moderate:2}, duration:{short:3}, companion:{family:3,couple:2,friends:2}, occupation:{worker_young:2,worker_senior:2,homemaker:3,student:2} },
   },
   {
-    id: 'maldives',
-    name: 'モルディブ',
-    country: '🇲🇻 モルディブ',
-    emoji: '🐠',
-    bg: 'linear-gradient(135deg, #0369a1, #0284c7)',
-    desc: '透明度抜群のインド洋に浮かぶ白砂の楽園。水上コテージから海に飛び込む究極のリゾート体験。ハネムーンの聖地として世界的に有名。',
-    tags: ['水上コテージ', 'シュノーケル', '絶景', 'ハネムーン'],
-    bestTime: '12〜4月',
-    budget: '高め',
-    duration: '5〜7日',
-    scores: { style: { beach: 3 }, climate: { tropical: 3 }, purpose: { relax: 3, scenery: 3 }, budget: { luxury: 3 }, companion: { couple: 3 } },
+    id:'malaysia', name:'マレーシア', country:'🇲🇾 マレーシア', emoji:'🌃',
+    bg:'linear-gradient(135deg,#065f46,#047857)',
+    desc:'ペトロナスツインタワー、ランカウイ島の白砂ビーチ、マレー・中華・インド料理が混ざるグルメ天国。物価が安く英語も通じるコスパ優秀な国。',
+    highlight:'多民族文化が生む多彩なグルメと、ビーチから都市まで一国で楽しめる。',
+    tags:['グルメ','ビーチ','英語圏','コスパ◎'], bestTime:'3〜10月', budget:'低め', duration:'5〜10日',
+    scores:{ style:{food:3,beach:2,culture:1}, climate:{tropical:3}, purpose:{relax:2,exchange:2}, budget:{budget:3,moderate:2}, companion:{friends:3,couple:2,family:2}, occupation:{student:3,worker_young:3,freelance:2} },
   },
   {
-    id: 'vietnam',
-    name: 'ベトナム',
-    country: '🇻🇳 ベトナム',
-    emoji: '🏮',
-    bg: 'linear-gradient(135deg, #7f1d1d, #991b1b)',
-    desc: 'フォー、バインミー、ブンボーフエ…アジア屈指のグルメ大国。ハロン湾の奇岩、ホイアンの旧市街、バイクで溢れるハノイの路地裏が旅心をくすぐる。',
-    tags: ['グルメ', '世界遺産', '旧市街', 'コスパ◎'],
-    bestTime: '11〜4月（南部）',
-    budget: '低め',
-    duration: '7〜14日',
-    scores: { style: { food: 3, culture: 2 }, climate: { tropical: 2 }, purpose: { exchange: 3, scenery: 2 }, budget: { budget: 3 }, companion: { solo: 2, friends: 3, couple: 2 } },
+    id:'philippines', name:'フィリピン（パラワン）', country:'🇵🇭 フィリピン', emoji:'🏝️',
+    bg:'linear-gradient(135deg,#0c4a6e,#075985)',
+    desc:'「世界最美のビーチ」に選ばれた白砂と透明度抜群のエルニド、コロン島。島ホッピング、ダイビング、カヤックで大自然を満喫できる。',
+    highlight:'コスパ最強の南国ビーチ。透明度抜群の海でダイビング初体験にも最適。',
+    tags:['ビーチ','ダイビング','島巡り','絶景'], bestTime:'12〜5月', budget:'低め', duration:'5〜10日',
+    scores:{ style:{beach:3,nature:2}, climate:{tropical:3}, purpose:{relax:3,scenery:3,adventure:2}, budget:{budget:3}, companion:{couple:3,friends:3,solo:2}, occupation:{student:3,worker_young:3,freelance:2} },
   },
   {
-    id: 'switzerland',
-    name: 'スイス',
-    country: '🇨🇭 スイス',
-    emoji: '⛰️',
-    bg: 'linear-gradient(135deg, #1e3a5f, #1e40af)',
-    desc: 'マッターホルン、ユングフラウ、レマン湖…アルプスの絶景を登山鉄道で気軽に楽しめる。チョコレートとチーズ、そして清潔で安全な国として定評。',
-    tags: ['アルプス', '登山鉄道', '絶景', 'チョコ'],
-    bestTime: '6〜9月（夏）、12〜2月（冬）',
-    budget: '高め',
-    duration: '7〜14日',
-    scores: { style: { nature: 3, culture: 1 }, climate: { cold: 2, seasonal: 3 }, purpose: { scenery: 3, relax: 2 }, budget: { luxury: 3 }, companion: { couple: 3, family: 2 } },
+    id:'cambodia', name:'カンボジア（アンコール遺跡）', country:'🇰🇭 カンボジア', emoji:'🏯',
+    bg:'linear-gradient(135deg,#78350f,#b45309)',
+    desc:'アンコールワット・アンコールトム…クメール王朝が築いた世界最大の宗教建築群。密林の中に広がる遺跡群は人類史上最大の建造物のひとつ。',
+    highlight:'世界最大の遺跡群を格安で体験。歴史好きには一生に一度の感動が待つ。',
+    tags:['世界遺産','遺跡','歴史','コスパ◎'], bestTime:'11〜3月', budget:'低め', duration:'3〜7日',
+    scores:{ style:{culture:3}, climate:{tropical:2}, purpose:{exchange:3,scenery:2,adventure:2}, budget:{budget:3}, companion:{solo:2,friends:2,couple:2}, occupation:{student:3,freelance:2,worker_young:2} },
   },
   {
-    id: 'morocco',
-    name: 'モロッコ',
-    country: '🇲🇦 モロッコ',
-    emoji: '🕌',
-    bg: 'linear-gradient(135deg, #7c2d12, #9a3412)',
-    desc: 'サハラ砂漠のラクダトレッキング、マラケシュのスーク、フェズの迷宮…アフリカ・アラブ・ベルベル文化が混ざり合う唯一無二の旅先。',
-    tags: ['砂漠', '異文化', '迷宮都市', '絶景'],
-    bestTime: '3〜5月、9〜11月',
-    budget: '中程度',
-    duration: '7〜14日',
-    scores: { style: { culture: 3, nature: 2 }, climate: { mild: 2 }, purpose: { adventure: 3, exchange: 3, scenery: 2 }, budget: { budget: 2, moderate: 3 }, companion: { solo: 2, friends: 3, couple: 2 } },
+    id:'nepal', name:'ネパール（ヒマラヤ）', country:'🇳🇵 ネパール', emoji:'⛰️',
+    bg:'linear-gradient(135deg,#7f1d1d,#991b1b)',
+    desc:'エベレストを含むヒマラヤ山脈、カトマンズの世界遺産、トレッキング…山岳国家ならではの圧倒的なスケールの自然と多様な民族文化が待つ。',
+    highlight:'地球最高峰の絶景をトレッキングで間近に感じる、アドベンチャー最高峰。',
+    tags:['ヒマラヤ','トレッキング','世界遺産','絶景'], bestTime:'10〜11月、3〜5月', budget:'低め', duration:'7〜21日',
+    scores:{ style:{nature:3,culture:2}, climate:{cold:2}, purpose:{adventure:3,scenery:3,exchange:2}, budget:{budget:3,moderate:2}, duration:{long:3,week:2}, companion:{solo:3,friends:3}, occupation:{student:3,freelance:3,worker_young:2} },
   },
   {
-    id: 'hawaii',
-    name: 'ハワイ',
-    country: '🇺🇸 アメリカ（ハワイ州）',
-    emoji: '🌺',
-    bg: 'linear-gradient(135deg, #0f4c81, #1a5276)',
-    desc: '年中温暖なリゾート天国。ビーチ、ショッピング、ハワイアン文化、火山国立公園まで揃う万能旅行先。子連れファミリーにも大人気。',
-    tags: ['ビーチ', 'リゾート', 'ファミリー', 'ショッピング'],
-    bestTime: '4〜9月',
-    budget: '中〜高め',
-    duration: '5〜10日',
-    scores: { style: { beach: 3, food: 1 }, climate: { tropical: 3 }, purpose: { relax: 3, scenery: 1 }, budget: { moderate: 2, luxury: 2 }, companion: { family: 3, couple: 3, friends: 2 } },
+    id:'srilanka', name:'スリランカ', country:'🇱🇰 スリランカ', emoji:'🌿',
+    bg:'linear-gradient(135deg,#064e3b,#065f46)',
+    desc:'世界遺産の古代都市シーギリア、紅茶の茶畑、象との出会い、青い海…小さな島にすべてが詰まった「インド洋の宝石」。まだ混雑していない穴場。',
+    highlight:'遺跡・自然・ビーチが凝縮。まだ旅行者が少ない今が行き時の秘境リゾート。',
+    tags:['遺跡','紅茶','象','穴場'], bestTime:'12〜3月（南西部）', budget:'低め', duration:'7〜14日',
+    scores:{ style:{culture:2,nature:3,beach:1}, climate:{tropical:3}, purpose:{adventure:2,scenery:3,exchange:2}, budget:{budget:3,moderate:2}, companion:{couple:2,friends:2,solo:2}, occupation:{freelance:3,student:2,worker_young:2} },
   },
   {
-    id: 'japan_abroad',
-    name: '韓国・ソウル',
-    country: '🇰🇷 韓国',
-    emoji: '🏙️',
-    bg: 'linear-gradient(135deg, #4c1d95, #5b21b6)',
-    desc: '焼肉、チキン、チムジルバン（サウナ）、Kコスメ…近くて便利な隣国。短期旅行に最適で、明洞・弘大・益善洞など観光スポットも充実。',
-    tags: ['グルメ', 'Kカルチャー', 'コスメ', 'コスパ◎'],
-    bestTime: '3〜5月、9〜11月',
-    budget: '低め',
-    duration: '3〜5日',
-    scores: { style: { food: 3, culture: 2 }, climate: { seasonal: 3, mild: 1 }, purpose: { exchange: 2, scenery: 1 }, budget: { budget: 3 }, duration: { short: 3 }, companion: { friends: 3, couple: 3, solo: 2 } },
+    id:'bhutan', name:'ブータン', country:'🇧🇹 ブータン', emoji:'🏔️',
+    bg:'linear-gradient(135deg,#1e3a5f,#1e40af)',
+    desc:'「世界一幸せな国」と呼ばれるヒマラヤの秘境王国。タクツァン僧院、自然保護区…入国者数を制限しているため混雑なく、真の秘境旅行が楽しめる。',
+    highlight:'世界が羨む幸福の国。入国制限で人混みゼロ、本物の秘境体験ができる。',
+    tags:['秘境','幸福の国','ヒマラヤ','仏教文化'], bestTime:'3〜5月、9〜11月', budget:'高め', duration:'7〜14日',
+    scores:{ style:{culture:3,nature:3}, climate:{cold:2,mild:1}, purpose:{adventure:2,exchange:3,scenery:3}, budget:{luxury:2,moderate:2}, companion:{solo:2,couple:2}, occupation:{worker_senior:3,freelance:3} },
   },
   {
-    id: 'peru',
-    name: 'ペルー',
-    country: '🇵🇪 ペルー',
-    emoji: '🦙',
-    bg: 'linear-gradient(135deg, #065f46, #047857)',
-    desc: 'マチュピチュ、ナスカの地上絵、アマゾン…人類の謎と大自然が共存する南米の秘境。旅人を強く魅了する、一度行ったら忘れられない国。',
-    tags: ['世界遺産', '秘境', '絶景', 'アドベンチャー'],
-    bestTime: '5〜10月',
-    budget: '中程度',
-    duration: '10〜21日',
-    scores: { style: { nature: 3, culture: 2 }, climate: { mild: 2 }, purpose: { adventure: 3, scenery: 3, exchange: 2 }, budget: { moderate: 3 }, duration: { long: 3 }, companion: { solo: 2, friends: 2, couple: 2 } },
+    id:'laos', name:'ラオス（ルアンパバーン）', country:'🇱🇦 ラオス', emoji:'🛶',
+    bg:'linear-gradient(135deg,#7c2d12,#9a3412)',
+    desc:'メコン川が流れる静かな古都ルアンパバーン。早朝の托鉢、クアンシー滝、洞窟仏…東南アジアで最もゆったりした時間が流れる、癒しの国。',
+    highlight:'喧騒から離れたい人に。メコン川沿いで流れる時間が驚くほどゆっくり。',
+    tags:['癒し','世界遺産','メコン川','のんびり'], bestTime:'11〜2月', budget:'低め', duration:'5〜10日',
+    scores:{ style:{culture:2,nature:2}, climate:{tropical:2,mild:1}, purpose:{relax:3,exchange:2}, budget:{budget:3}, companion:{couple:2,solo:3,friends:2}, occupation:{freelance:3,student:2} },
+  },
+
+  // ---- MIDDLE EAST ----
+  {
+    id:'uae', name:'ドバイ（UAE）', country:'🇦🇪 アラブ首長国連邦', emoji:'🏙️',
+    bg:'linear-gradient(135deg,#92400e,#b45309)',
+    desc:'世界一高いブルジュハリファ、人工島パーム・ジュメイラ、砂漠サファリ…想像を絶するスケールの未来都市。ショッピングモールと贅沢ホテルも最高峰。',
+    highlight:'人類の建築の極限を体験。未来都市のスケールに圧倒される非日常体験。',
+    tags:['超高層ビル','砂漠','ラグジュアリー','ショッピング'], bestTime:'11〜3月', budget:'高め', duration:'3〜7日',
+    scores:{ style:{culture:1}, climate:{tropical:2}, purpose:{scenery:3,adventure:2}, budget:{luxury:3}, companion:{couple:3,friends:2,family:2}, occupation:{worker_senior:3,worker_young:2} },
   },
   {
-    id: 'australia',
-    name: 'オーストラリア',
-    country: '🇦🇺 オーストラリア',
-    emoji: '🦘',
-    bg: 'linear-gradient(135deg, #7c3aed, #6d28d9)',
-    desc: 'グレートバリアリーフ、エアーズロック、コアラ…英語が使えるため初海外にも最適。都市（シドニー・メルボルン）と自然の両方を楽しめる。',
-    tags: ['自然', '英語圏', 'ビーチ', '動物'],
-    bestTime: '9〜11月、3〜5月',
-    budget: '中〜高め',
-    duration: '7〜21日',
-    scores: { style: { nature: 3, beach: 2 }, climate: { mild: 2, tropical: 1 }, purpose: { adventure: 2, relax: 2, scenery: 2 }, budget: { moderate: 2, luxury: 2 }, companion: { family: 3, friends: 2, solo: 2 } },
+    id:'jordan', name:'ヨルダン（ペトラ遺跡）', country:'🇯🇴 ヨルダン', emoji:'🏺',
+    bg:'linear-gradient(135deg,#7f1d1d,#b91c1c)',
+    desc:'砂岩を削り出したペトラ遺跡、死海での浮遊体験、ワディ・ラムの赤い砂漠…中東で最も安全で旅しやすい国のひとつ。インディ・ジョーンズの舞台。',
+    highlight:'映画のような赤い岩の遺跡と死海。中東で最も安全に絶景を楽しめる。',
+    tags:['ペトラ遺跡','死海','砂漠','中東'], bestTime:'3〜5月、9〜11月', budget:'中程度', duration:'5〜10日',
+    scores:{ style:{culture:3,nature:2}, climate:{mild:2}, purpose:{adventure:3,scenery:3,exchange:2}, budget:{moderate:3}, companion:{couple:2,friends:2,solo:2}, occupation:{freelance:2,worker_young:2,worker_senior:2} },
   },
   {
-    id: 'spain',
-    name: 'スペイン',
-    country: '🇪🇸 スペイン',
-    emoji: '💃',
-    bg: 'linear-gradient(135deg, #c2410c, #ea580c)',
-    desc: 'フラメンコ、サグラダファミリア、タパス、パエリア…情熱と芸術の国。バルセロナのガウディ建築からマドリードの美術館まで多彩な魅力が詰まっている。',
-    tags: ['芸術', 'グルメ', '建築', 'フラメンコ'],
-    bestTime: '4〜6月、9〜10月',
-    budget: '中程度',
-    duration: '7〜14日',
-    scores: { style: { culture: 3, food: 3 }, climate: { mild: 3 }, purpose: { exchange: 3, scenery: 2 }, budget: { moderate: 3 }, companion: { couple: 2, friends: 3, solo: 2 } },
+    id:'oman', name:'オマーン', country:'🇴🇲 オマーン', emoji:'🏜️',
+    bg:'linear-gradient(135deg,#166534,#15803d)',
+    desc:'ムスカットの白亜の宮殿、ワジでの水浴び、砂漠キャンプ…「中東で最も安全な国」として知られ、アラビアの伝統文化を豊かに残す穴場の旅先。',
+    highlight:'中東で最も穏やか。砂漠・山・海が揃う、まだ混んでいない本物の秘境。',
+    tags:['砂漠','穴場','安全','アラビア文化'], bestTime:'10〜3月', budget:'中程度', duration:'7〜14日',
+    scores:{ style:{culture:2,nature:3}, climate:{tropical:2,mild:1}, purpose:{adventure:2,exchange:3,scenery:2}, budget:{moderate:2,luxury:2}, companion:{solo:2,couple:2,friends:2}, occupation:{freelance:3,worker_senior:2} },
+  },
+
+  // ---- EUROPE ----
+  {
+    id:'france', name:'パリ', country:'🇫🇷 フランス', emoji:'🗼',
+    bg:'linear-gradient(135deg,#1e1b4b,#312e81)',
+    desc:'エッフェル塔、ルーブル美術館、ヴェルサイユ宮殿…世界最高峰の芸術と食文化が集まる「光の都」。どこを歩いても絵になる街並み。',
+    highlight:'世界中の人が憧れる美の都。芸術・食・ファッションすべてが世界最高峰。',
+    tags:['芸術','食','ファッション','歴史'], bestTime:'4〜6月、9〜11月', budget:'高め', duration:'5〜10日',
+    scores:{ style:{culture:3,food:3}, climate:{mild:3,seasonal:2}, purpose:{scenery:3,exchange:2}, budget:{moderate:2,luxury:3}, companion:{couple:3,friends:2}, occupation:{worker_senior:3,worker_young:2,freelance:2} },
   },
   {
-    id: 'canada',
-    name: 'カナダ',
-    country: '🇨🇦 カナダ',
-    emoji: '🍁',
-    bg: 'linear-gradient(135deg, #7f1d1d, #b91c1c)',
-    desc: 'バンフ国立公園のターコイズブルーの湖、ナイアガラの滝、オーロラ観測…広大な自然と安全な都市が魅力。英語圏で旅しやすい。',
-    tags: ['紅葉', 'オーロラ', '国立公園', '英語圏'],
-    bestTime: '9〜10月（紅葉）、12〜3月（オーロラ）',
-    budget: '中〜高め',
-    duration: '7〜14日',
-    scores: { style: { nature: 3 }, climate: { cold: 3, seasonal: 2 }, purpose: { scenery: 3, adventure: 2 }, budget: { moderate: 2, luxury: 2 }, companion: { family: 2, couple: 2, solo: 2 } },
+    id:'italy', name:'イタリア', country:'🇮🇹 イタリア', emoji:'🍕',
+    bg:'linear-gradient(135deg,#166534,#15803d)',
+    desc:'ローマ、ヴェネツィア、フィレンツェ…古代遺跡と芸術の宝庫。世界最高峰のパスタ、ピザ、ジェラートで食の旅も最高。',
+    highlight:'歴史・芸術・食の三冠王。路地を歩くだけで映画の中にいるような体験。',
+    tags:['歴史','グルメ','芸術','ゴンドラ'], bestTime:'4〜6月、9〜10月', budget:'中〜高め', duration:'7〜14日',
+    scores:{ style:{culture:3,food:3}, climate:{mild:3}, purpose:{scenery:2,exchange:2,relax:2}, budget:{moderate:3,luxury:2}, companion:{couple:3,family:2,friends:2}, occupation:{worker_senior:2,worker_young:2,freelance:2,student:2} },
   },
   {
-    id: 'greece',
-    name: 'ギリシャ',
-    country: '🇬🇷 ギリシャ',
-    emoji: '🏛️',
-    bg: 'linear-gradient(135deg, #1e40af, #2563eb)',
-    desc: 'サントリーニ島の白と青の絶景、アクロポリス、エーゲ海の美しいビーチ…地中海ロマンの極み。カップルや新婚旅行に絶大な人気を誇る。',
-    tags: ['絶景', 'ロマンチック', '地中海', '遺跡'],
-    bestTime: '5〜10月',
-    budget: '中程度',
-    duration: '7〜14日',
-    scores: { style: { beach: 2, culture: 2 }, climate: { mild: 3, tropical: 1 }, purpose: { scenery: 3, relax: 3 }, budget: { moderate: 3 }, companion: { couple: 3, friends: 2 } },
+    id:'spain', name:'スペイン', country:'🇪🇸 スペイン', emoji:'💃',
+    bg:'linear-gradient(135deg,#c2410c,#ea580c)',
+    desc:'フラメンコ、サグラダファミリア、タパス、パエリア…情熱と芸術の国。バルセロナのガウディ建築からマドリードの美術館まで多彩な魅力が詰まっている。',
+    highlight:'食・芸術・建築の密度が欧州トップクラス。テンションが上がる情熱の国。',
+    tags:['芸術','グルメ','建築','フラメンコ'], bestTime:'4〜6月、9〜10月', budget:'中程度', duration:'7〜14日',
+    scores:{ style:{culture:3,food:3}, climate:{mild:3}, purpose:{exchange:3,scenery:2}, budget:{moderate:3}, companion:{couple:2,friends:3,solo:2}, occupation:{student:2,worker_young:2,freelance:2,worker_senior:2} },
   },
   {
-    id: 'india',
-    name: 'インド',
-    country: '🇮🇳 インド',
-    emoji: '🕌',
-    bg: 'linear-gradient(135deg, #78350f, #d97706)',
-    desc: 'タージ・マハル、バラナシのガンジス河、ラジャスタンの宮殿…圧倒的なカオスと神秘が共存する。食も安くバラエティ豊か。人生観が変わる旅先。',
-    tags: ['異文化', '世界遺産', 'スパイス料理', '刺激'],
-    bestTime: '10〜3月',
-    budget: '低め',
-    duration: '7〜21日',
-    scores: { style: { culture: 3, food: 2 }, climate: { tropical: 2 }, purpose: { adventure: 3, exchange: 3 }, budget: { budget: 3 }, companion: { solo: 2, friends: 2 } },
+    id:'greece', name:'ギリシャ（サントリーニ）', country:'🇬🇷 ギリシャ', emoji:'🏛️',
+    bg:'linear-gradient(135deg,#1e40af,#2563eb)',
+    desc:'サントリーニ島の白と青の絶景、アクロポリス、エーゲ海の美しいビーチ…地中海ロマンの極み。カップルや新婚旅行に絶大な人気を誇る。',
+    highlight:'世界で最も「インスタ映え」する街。カップルには夢のような場所。',
+    tags:['絶景','ロマンチック','地中海','遺跡'], bestTime:'5〜10月', budget:'中程度', duration:'7〜14日',
+    scores:{ style:{beach:2,culture:2}, climate:{mild:3,tropical:1}, purpose:{scenery:3,relax:3}, budget:{moderate:3}, companion:{couple:3,friends:2}, occupation:{worker_young:2,worker_senior:2,freelance:2} },
   },
   {
-    id: 'norway',
-    name: 'ノルウェー',
-    country: '🇳🇴 ノルウェー',
-    emoji: '🌌',
-    bg: 'linear-gradient(135deg, #0c4a6e, #164e63)',
-    desc: '世界最高峰のフィヨルドクルーズ、オーロラ、トロールトゥンガの断崖絶壁…北欧の極上な自然体験。夏は白夜、冬はオーロラと季節ごとに異なる顔を見せる。',
-    tags: ['フィヨルド', 'オーロラ', '白夜', '絶景'],
-    bestTime: '6〜8月（フィヨルド）、10〜3月（オーロラ）',
-    budget: '高め',
-    duration: '7〜14日',
-    scores: { style: { nature: 3 }, climate: { cold: 3 }, purpose: { scenery: 3, adventure: 2 }, budget: { luxury: 2, moderate: 2 }, companion: { couple: 2, friends: 2, solo: 2 } },
+    id:'portugal', name:'ポルトガル（リスボン）', country:'🇵🇹 ポルトガル', emoji:'🐓',
+    bg:'linear-gradient(135deg,#7c3aed,#6d28d9)',
+    desc:'ファドの音楽が流れる路面電車の街リスボン、ポルト、アルガルヴェのビーチ…西欧で最もコスパがよく素朴で美しい国。ヨーロッパ好きの隠れ家。',
+    highlight:'西欧で最もコスパが高い。食・酒・風景すべてが一流で物価は控えめ。',
+    tags:['路面電車','ファド','コスパ◎','海岸'], bestTime:'4〜10月', budget:'中程度', duration:'5〜10日',
+    scores:{ style:{culture:2,food:2,beach:1}, climate:{mild:3}, purpose:{relax:2,exchange:3,scenery:2}, budget:{moderate:3,budget:2}, companion:{couple:2,solo:3,friends:2}, occupation:{freelance:3,student:2,worker_young:2} },
   },
   {
-    id: 'singapore',
-    name: 'シンガポール',
-    country: '🇸🇬 シンガポール',
-    emoji: '🌆',
-    bg: 'linear-gradient(135deg, #0f4c81, #1565c0)',
-    desc: 'マリーナベイサンズ、ガーデンズバイザベイ、ホーカーセンターのチキンライス…コンパクトで清潔。初海外・家族連れに最適で、ショッピングも充実。',
-    tags: ['近代都市', 'グルメ', '安全', '初心者向け'],
-    bestTime: '年中（雨季に注意）',
-    budget: '中程度',
-    duration: '3〜5日',
-    scores: { style: { food: 3, culture: 1 }, climate: { tropical: 3 }, purpose: { relax: 1, exchange: 2, scenery: 1 }, budget: { moderate: 2 }, duration: { short: 3 }, companion: { family: 3, couple: 2, friends: 2 } },
+    id:'croatia', name:'クロアチア（ドゥブロヴニク）', country:'🇭🇷 クロアチア', emoji:'🌊',
+    bg:'linear-gradient(135deg,#0369a1,#0284c7)',
+    desc:'「アドリア海の真珠」ドゥブロヴニク旧市街、プリトヴィツェ湖群国立公園…「ゲーム・オブ・スローンズ」の舞台にもなった中世の城壁都市。',
+    highlight:'中世の城壁と紺碧の海。映画のセットのような唯一無二の美しさ。',
+    tags:['旧市街','アドリア海','世界遺産','絶景'], bestTime:'5〜9月', budget:'中程度', duration:'5〜10日',
+    scores:{ style:{culture:2,beach:2}, climate:{mild:3}, purpose:{scenery:3,relax:2}, budget:{moderate:3}, companion:{couple:3,friends:2,solo:2}, occupation:{worker_young:2,freelance:2,worker_senior:2} },
+  },
+  {
+    id:'switzerland', name:'スイス', country:'🇨🇭 スイス', emoji:'🏔️',
+    bg:'linear-gradient(135deg,#1e3a5f,#1e40af)',
+    desc:'マッターホルン、ユングフラウ、レマン湖…アルプスの絶景を登山鉄道で気軽に楽しめる。チョコレートとチーズ、そして清潔で安全な国として定評。',
+    highlight:'絵葉書そのままのアルプス絶景。列車旅で移動しながら次々と絶景が広がる。',
+    tags:['アルプス','登山鉄道','絶景','チョコ'], bestTime:'6〜9月、12〜2月', budget:'高め', duration:'7〜14日',
+    scores:{ style:{nature:3,culture:1}, climate:{cold:2,seasonal:3}, purpose:{scenery:3,relax:2}, budget:{luxury:3}, companion:{couple:3,family:2}, occupation:{worker_senior:3,freelance:2} },
+  },
+  {
+    id:'austria', name:'オーストリア（ウィーン）', country:'🇦🇹 オーストリア', emoji:'🎵',
+    bg:'linear-gradient(135deg,#1e1b4b,#3730a3)',
+    desc:'音楽の都ウィーン、モーツァルトの生地ザルツブルク、ハルシュタットの湖畔の村…クラシック音楽、世界最高のカフェ文化、中世の城が混ざり合う。',
+    highlight:'モーツァルト、ベートーベンが生きた音楽と宮廷文化の中心地。品格ある旅。',
+    tags:['音楽','カフェ','宮殿','世界遺産'], bestTime:'4〜10月', budget:'高め', duration:'5〜10日',
+    scores:{ style:{culture:3,food:2}, climate:{mild:2,seasonal:2}, purpose:{exchange:2,scenery:2,relax:2}, budget:{luxury:2,moderate:2}, companion:{couple:3,solo:2}, occupation:{worker_senior:3,freelance:2,worker_young:2} },
+  },
+  {
+    id:'germany', name:'ドイツ（バイエルン）', country:'🇩🇪 ドイツ', emoji:'🏰',
+    bg:'linear-gradient(135deg,#1c1917,#292524)',
+    desc:'ノイシュヴァンシュタイン城、ロマンティック街道、ビール祭り（オクトーバーフェスト）…おとぎ話の城と本場ビールの国。秋の紅葉も格別。',
+    highlight:'おとぎ話の城と本場ビール。ファンタジーと食の旅が同時に楽しめる。',
+    tags:['城','ビール','ロマンティック街道','クリスマス市'], bestTime:'4〜10月', budget:'中程度', duration:'7〜14日',
+    scores:{ style:{culture:3,food:2}, climate:{seasonal:3,mild:2}, purpose:{exchange:2,scenery:2}, budget:{moderate:3}, companion:{friends:3,couple:2,family:2}, occupation:{student:2,worker_young:2,worker_senior:2} },
+  },
+  {
+    id:'czech', name:'チェコ（プラハ）', country:'🇨🇿 チェコ', emoji:'🍺',
+    bg:'linear-gradient(135deg,#7c3aed,#6d28d9)',
+    desc:'プラハ旧市街、カレル橋、プラハ城…中世の街並みがそのまま残るヨーロッパ屈指の美しい古都。ビールが水より安く、観光客も日本語ガイドも充実。',
+    highlight:'中世の石畳がそのまま残る街。欧州で最も美しい旧市街のひとつ。',
+    tags:['旧市街','世界遺産','ビール','中世建築'], bestTime:'4〜10月', budget:'低〜中', duration:'3〜7日',
+    scores:{ style:{culture:3}, climate:{seasonal:2,mild:2}, purpose:{scenery:3,exchange:2}, budget:{budget:2,moderate:3}, companion:{couple:2,friends:3,solo:2}, occupation:{student:3,worker_young:2,freelance:2} },
+  },
+  {
+    id:'hungary', name:'ハンガリー（ブダペスト）', country:'🇭🇺 ハンガリー', emoji:'🏟️',
+    bg:'linear-gradient(135deg,#7f1d1d,#991b1b)',
+    desc:'ドナウ川の真珠・ブダペスト。世界最大の議事堂、温泉文化、夜のイルミネーション…東欧で最もコスパがよく美しい首都として旅行者に愛されている。',
+    highlight:'夜景が欧州トップクラス。温泉でのんびりしながら絶景を堪能できる。',
+    tags:['夜景','温泉','世界遺産','コスパ◎'], bestTime:'4〜10月', budget:'低め', duration:'3〜7日',
+    scores:{ style:{culture:3}, climate:{seasonal:2}, purpose:{scenery:3,relax:2}, budget:{budget:3}, companion:{couple:3,friends:2,solo:2}, occupation:{student:3,worker_young:2,freelance:2} },
+  },
+  {
+    id:'poland', name:'ポーランド（クラクフ）', country:'🇵🇱 ポーランド', emoji:'🏰',
+    bg:'linear-gradient(135deg,#166534,#15803d)',
+    desc:'ヴァヴェル城、旧市街、アウシュビッツ歴史地区…東欧で最も歴史が深く、かつ物価が安い国。近年急速に人気が高まっている穴場ヨーロッパの旅先。',
+    highlight:'欧州で最もコスパ優秀な穴場。歴史の重みを感じる旅が格安でできる。',
+    tags:['世界遺産','歴史','穴場','コスパ◎'], bestTime:'5〜9月', budget:'低め', duration:'3〜7日',
+    scores:{ style:{culture:3}, climate:{seasonal:2}, purpose:{exchange:2,scenery:2}, budget:{budget:3}, companion:{solo:2,friends:2,couple:2}, occupation:{student:3,freelance:2} },
+  },
+  {
+    id:'ireland', name:'アイルランド（ダブリン）', country:'🇮🇪 アイルランド', emoji:'🍀',
+    bg:'linear-gradient(135deg,#064e3b,#065f46)',
+    desc:'モハーの断崖、パブ文化、アイリッシュ音楽…英語が第一言語で旅しやすく、緑の丘とケルト文化が旅人を魅了する。ギネスビールと温かい人々が名物。',
+    highlight:'英語OK・アイリッシュパブで地元の人と交流。ケルト文化の生きた博物館。',
+    tags:['英語圏','断崖絶壁','パブ文化','ケルト'], bestTime:'5〜9月', budget:'中程度', duration:'5〜10日',
+    scores:{ style:{culture:2,nature:2}, climate:{cold:2,mild:1}, purpose:{exchange:3,scenery:3}, budget:{moderate:2}, companion:{friends:3,solo:2,couple:2}, occupation:{student:2,worker_young:2,freelance:2} },
+  },
+  {
+    id:'uk', name:'イギリス（ロンドン）', country:'🇬🇧 イギリス', emoji:'🎡',
+    bg:'linear-gradient(135deg,#1e1b4b,#312e81)',
+    desc:'大英博物館、バッキンガム宮殿、ハリー・ポッターの舞台…英語が学べて観光も充実。コッツウォルズの田園地帯、スコットランドのハイランドも絶景。',
+    highlight:'英語を使える喜びと、世界最大の博物館・美術館が無料で楽しめる。',
+    tags:['英語圏','博物館無料','王室','ハリポタ'], bestTime:'5〜9月', budget:'高め', duration:'7〜14日',
+    scores:{ style:{culture:3,food:1}, climate:{cold:2,mild:1}, purpose:{exchange:2,scenery:2}, budget:{moderate:2,luxury:2}, companion:{family:2,friends:2,solo:2}, occupation:{student:2,worker_young:2,worker_senior:2} },
+  },
+  {
+    id:'netherlands', name:'オランダ（アムステルダム）', country:'🇳🇱 オランダ', emoji:'🌷',
+    bg:'linear-gradient(135deg,#7c3aed,#6d28d9)',
+    desc:'運河沿いの街並み、チューリップ畑（キューケンホフ）、自転車文化、ゴッホ美術館…ヨーロッパで最もリベラルで多様性にあふれた個性的な都市国家。',
+    highlight:'チューリップと運河が生む絵本のような景色。欧州屈指の自由な雰囲気。',
+    tags:['運河','チューリップ','美術館','自転車'], bestTime:'3〜5月（チューリップ）', budget:'中程度', duration:'3〜7日',
+    scores:{ style:{culture:2,nature:1}, climate:{mild:2,seasonal:2}, purpose:{scenery:3,exchange:2}, budget:{moderate:2,luxury:2}, companion:{couple:2,friends:3,solo:2}, occupation:{worker_young:2,student:2,freelance:2} },
+  },
+  {
+    id:'iceland', name:'アイスランド', country:'🇮🇸 アイスランド', emoji:'🌋',
+    bg:'linear-gradient(135deg,#0c4a6e,#075985)',
+    desc:'オーロラ、間欠泉、溶岩台地、氷河……地球の鼓動を感じられる唯一無二の絶景大国。世界で最も非日常を体感できる旅先のひとつ。',
+    highlight:'地球の息吹を感じる唯一無二の景観。オーロラとともに宇宙に近い感覚を。',
+    tags:['オーロラ','絶景','自然','秘境'], bestTime:'9〜3月（オーロラ）', budget:'高め', duration:'7〜14日',
+    scores:{ style:{nature:3}, climate:{cold:3}, purpose:{adventure:3,scenery:3}, budget:{luxury:2,moderate:2}, companion:{couple:2,friends:2,solo:2}, occupation:{freelance:3,worker_young:2,worker_senior:2} },
+  },
+  {
+    id:'norway', name:'ノルウェー', country:'🇳🇴 ノルウェー', emoji:'🌌',
+    bg:'linear-gradient(135deg,#0c4a6e,#164e63)',
+    desc:'世界最高峰のフィヨルドクルーズ、オーロラ、トロールトゥンガの断崖絶壁…北欧の極上な自然体験。夏は白夜、冬はオーロラと季節ごとに異なる顔。',
+    highlight:'フィヨルドの壮大さは他に類を見ない。白夜・オーロラで季節2倍楽しめる。',
+    tags:['フィヨルド','オーロラ','白夜','絶景'], bestTime:'6〜8月（夏）、10〜3月（冬）', budget:'高め', duration:'7〜14日',
+    scores:{ style:{nature:3}, climate:{cold:3}, purpose:{scenery:3,adventure:2}, budget:{luxury:2,moderate:2}, companion:{couple:2,friends:2,solo:2}, occupation:{worker_senior:2,freelance:3} },
+  },
+  {
+    id:'finland', name:'フィンランド（ラップランド）', country:'🇫🇮 フィンランド', emoji:'🦌',
+    bg:'linear-gradient(135deg,#1e40af,#1d4ed8)',
+    desc:'ガラス張りのイグルーでオーロラ鑑賞、サンタクロース村、トナカイそり…冬のラップランドは童話の世界そのもの。サウナ発祥の地でも。',
+    highlight:'ガラスイグルーでオーロラを見ながら眠る。サンタの本拠地で夢を体験。',
+    tags:['オーロラ','イグルー','サンタ','サウナ'], bestTime:'12〜3月（オーロラ）', budget:'高め', duration:'5〜10日',
+    scores:{ style:{nature:3}, climate:{cold:3}, purpose:{scenery:3,adventure:2,relax:2}, budget:{luxury:2,moderate:2}, companion:{couple:3,family:2,friends:2}, occupation:{worker_senior:3,worker_young:2,freelance:2} },
+  },
+  {
+    id:'georgia_eu', name:'ジョージア（トビリシ）', country:'🇬🇪 ジョージア', emoji:'🍷',
+    bg:'linear-gradient(135deg,#7f1d1d,#b91c1c)',
+    desc:'ワイン発祥の地、コーカサス山脈の絶景、洞窟都市ヴァルジア…「ヨーロッパとアジアの十字路」として注目急上昇中の隠れた宝石。物価も格安。',
+    highlight:'ワイン発祥の地で飲み放題。今最も熱い「知る人ぞ知る」欧州の穴場。',
+    tags:['ワイン','穴場','コーカサス','コスパ◎'], bestTime:'4〜6月、9〜11月', budget:'低め', duration:'5〜10日',
+    scores:{ style:{culture:3,food:2,nature:2}, climate:{mild:2,seasonal:2}, purpose:{adventure:2,exchange:3,scenery:2}, budget:{budget:3}, companion:{friends:3,solo:3,couple:2}, occupation:{freelance:3,student:3,worker_young:2} },
+  },
+  {
+    id:'turkey', name:'トルコ（カッパドキア）', country:'🇹🇷 トルコ', emoji:'🎈',
+    bg:'linear-gradient(135deg,#92400e,#b45309)',
+    desc:'奇岩と気球が舞うカッパドキア、世界最大のバザール、エフェソス遺跡…アジアとヨーロッパが交わる場所で東西文明の交差点を体感できる。',
+    highlight:'気球から見るカッパドキアは一生の思い出。唯一無二の絶景が待つ。',
+    tags:['気球','カッパドキア','遺跡','バザール'], bestTime:'4〜6月、9〜11月', budget:'中程度', duration:'7〜14日',
+    scores:{ style:{culture:3,nature:2}, climate:{mild:2}, purpose:{scenery:3,adventure:2,exchange:2}, budget:{moderate:3,budget:2}, companion:{couple:3,friends:2,solo:2}, occupation:{worker_young:2,freelance:2,student:2} },
+  },
+
+  // ---- OCEANIA ----
+  {
+    id:'australia', name:'オーストラリア', country:'🇦🇺 オーストラリア', emoji:'🦘',
+    bg:'linear-gradient(135deg,#7c3aed,#6d28d9)',
+    desc:'グレートバリアリーフ、エアーズロック、コアラ…英語が使えるため初海外にも最適。都市（シドニー・メルボルン）と自然の両方を楽しめる。',
+    highlight:'英語が使えて安全。コアラと本場バーベキューで家族全員が大満足。',
+    tags:['自然','英語圏','ビーチ','動物'], bestTime:'9〜11月、3〜5月', budget:'中〜高め', duration:'7〜21日',
+    scores:{ style:{nature:3,beach:2}, climate:{mild:2,tropical:1}, purpose:{adventure:2,relax:2,scenery:2}, budget:{moderate:2,luxury:2}, companion:{family:3,friends:2,solo:2}, occupation:{student:2,worker_young:2,homemaker:3} },
+  },
+  {
+    id:'newzealand', name:'ニュージーランド', country:'🇳🇿 ニュージーランド', emoji:'🏔️',
+    bg:'linear-gradient(135deg,#134e4a,#0f766e)',
+    desc:'壮大なフィヨルド、緑の牧草地、バンジージャンプ発祥地。ロードオブザリングの世界に迷い込んだような圧倒的な自然体験ができる。',
+    highlight:'アドベンチャースポーツ発祥の地。バンジー・スカイダイブで人生が変わる。',
+    tags:['アドベンチャー','絶景','自然','アクティビティ'], bestTime:'12〜2月（現地夏）', budget:'高め', duration:'10〜21日',
+    scores:{ style:{nature:3}, climate:{mild:2,cold:2}, purpose:{adventure:3,scenery:3}, budget:{moderate:2,luxury:2}, duration:{long:3}, companion:{friends:3,couple:2,solo:2}, occupation:{student:3,freelance:3,worker_young:2} },
+  },
+  {
+    id:'fiji', name:'フィジー', country:'🇫🇯 フィジー', emoji:'🌺',
+    bg:'linear-gradient(135deg,#0369a1,#0c4a6e)',
+    desc:'南太平洋の楽園。コーラル・コースト沿いの白砂ビーチ、世界屈指のダイビングスポット、フレンドリーなフィジー人…究極の癒しリゾートが揃う。',
+    highlight:'地球上で最もフレンドリーな人々と最高の海。ハネムーン最終候補の常連。',
+    tags:['南太平洋','ビーチ','ダイビング','癒し'], bestTime:'5〜10月', budget:'高め', duration:'5〜10日',
+    scores:{ style:{beach:3}, climate:{tropical:3}, purpose:{relax:3,scenery:2}, budget:{luxury:3,moderate:2}, companion:{couple:3,friends:2}, occupation:{worker_senior:3,worker_young:2} },
+  },
+
+  // ---- AMERICAS ----
+  {
+    id:'hawaii', name:'ハワイ', country:'🇺🇸 アメリカ（ハワイ州）', emoji:'🌺',
+    bg:'linear-gradient(135deg,#0f4c81,#1a5276)',
+    desc:'年中温暖なリゾート天国。ビーチ、ショッピング、ハワイアン文化、火山国立公園まで揃う万能旅行先。子連れファミリーにも大人気。',
+    highlight:'子どもからシニアまで安心の万能リゾート。すべてが揃う完璧な旅行先。',
+    tags:['ビーチ','リゾート','ファミリー','ショッピング'], bestTime:'4〜9月', budget:'中〜高め', duration:'5〜10日',
+    scores:{ style:{beach:3,food:1}, climate:{tropical:3}, purpose:{relax:3,scenery:1}, budget:{moderate:2,luxury:2}, companion:{family:3,couple:3,friends:2}, occupation:{worker_senior:2,homemaker:3,worker_young:2} },
+  },
+  {
+    id:'canada', name:'カナダ（バンフ）', country:'🇨🇦 カナダ', emoji:'🍁',
+    bg:'linear-gradient(135deg,#7f1d1d,#b91c1c)',
+    desc:'バンフ国立公園のターコイズブルーの湖、ナイアガラの滝、オーロラ観測…広大な自然と安全な都市が魅力。英語圏で旅しやすい。',
+    highlight:'英語OK・治安◎。ターコイズ色の湖畔でキャンプ、本場オーロラを鑑賞。',
+    tags:['紅葉','オーロラ','国立公園','英語圏'], bestTime:'9〜10月（紅葉）、12〜3月（オーロラ）', budget:'中〜高め', duration:'7〜14日',
+    scores:{ style:{nature:3}, climate:{cold:3,seasonal:2}, purpose:{scenery:3,adventure:2}, budget:{moderate:2,luxury:2}, companion:{family:2,couple:2,solo:2}, occupation:{worker_senior:2,freelance:2,student:2} },
+  },
+  {
+    id:'mexico', name:'メキシコ（カンクン）', country:'🇲🇽 メキシコ', emoji:'🌮',
+    bg:'linear-gradient(135deg,#166534,#15803d)',
+    desc:'カリブ海の白砂ビーチ、マヤ文明の遺跡チチェン・イツァー、タコスにテキーラ…日本から直行便もあり、食と遺跡とビーチを同時に楽しめる南北米最高峰のリゾート。',
+    highlight:'カリブ海の透明な海とマヤ遺跡の組み合わせは世界でここだけ。',
+    tags:['カリブ海','マヤ遺跡','グルメ','リゾート'], bestTime:'12〜4月', budget:'中程度', duration:'7〜14日',
+    scores:{ style:{beach:3,culture:2,food:2}, climate:{tropical:3}, purpose:{relax:2,scenery:2,adventure:2}, budget:{moderate:3}, companion:{family:2,couple:3,friends:3}, occupation:{worker_young:2,worker_senior:2,homemaker:2} },
+  },
+  {
+    id:'peru', name:'ペルー（マチュピチュ）', country:'🇵🇪 ペルー', emoji:'🦙',
+    bg:'linear-gradient(135deg,#065f46,#047857)',
+    desc:'マチュピチュ、ナスカの地上絵、アマゾン…人類の謎と大自然が共存する南米の秘境。旅人を強く魅了する、一度行ったら忘れられない国。',
+    highlight:'人類の謎・マチュピチュを雲の上で体験。旅好きが必ず一度は訪れる聖地。',
+    tags:['世界遺産','秘境','絶景','アドベンチャー'], bestTime:'5〜10月', budget:'中程度', duration:'10〜21日',
+    scores:{ style:{nature:3,culture:2}, climate:{mild:2}, purpose:{adventure:3,scenery:3,exchange:2}, budget:{moderate:3}, duration:{long:3}, companion:{solo:2,friends:2,couple:2}, occupation:{freelance:3,student:3,worker_young:2} },
+  },
+  {
+    id:'argentina', name:'アルゼンチン（ブエノスアイレス）', country:'🇦🇷 アルゼンチン', emoji:'💃',
+    bg:'linear-gradient(135deg,#1e3a5f,#1e40af)',
+    desc:'タンゴの発祥地ブエノスアイレス、パタゴニアの氷河、イグアスの滝…ラテンの情熱と大自然が共存する南米最大の都市国家。牛肉とワインが世界最高峰。',
+    highlight:'本場タンゴと世界一の牛ステーキ。イグアスの滝は世界三大瀑布のひとつ。',
+    tags:['タンゴ','グルメ','イグアスの滝','パタゴニア'], bestTime:'10〜3月（現地夏）', budget:'中程度', duration:'10〜21日',
+    scores:{ style:{culture:3,food:3,nature:2}, climate:{mild:2}, purpose:{exchange:3,scenery:2,adventure:2}, budget:{moderate:3}, duration:{long:3}, companion:{couple:2,friends:2,solo:2}, occupation:{freelance:3,student:2} },
+  },
+  {
+    id:'chile', name:'チリ（パタゴニア）', country:'🇨🇱 チリ', emoji:'🗻',
+    bg:'linear-gradient(135deg,#0c4a6e,#0369a1)',
+    desc:'トーレス・デル・パイネ国立公園の氷河、アタカマ砂漠の星空、イースター島のモアイ像…南米最南端のパタゴニアは地球の果ての圧倒的大自然。',
+    highlight:'地球の果ての氷河とモアイ像。人生観が変わるスケールの圧倒的自然体験。',
+    tags:['氷河','モアイ','パタゴニア','絶景'], bestTime:'11〜3月（現地夏）', budget:'中程度', duration:'10〜21日',
+    scores:{ style:{nature:3}, climate:{cold:3,mild:1}, purpose:{adventure:3,scenery:3}, budget:{moderate:3}, duration:{long:3}, companion:{solo:2,friends:2,couple:2}, occupation:{freelance:3,student:3} },
+  },
+  {
+    id:'costarica', name:'コスタリカ', country:'🇨🇷 コスタリカ', emoji:'🦜',
+    bg:'linear-gradient(135deg,#065f46,#064e3b)',
+    desc:'生物多様性の宝庫。ナマケモノ、ケツァール、ウミガメ…中米最高の自然保護国で、ジップライン・ラフティング・火山トレッキングが楽しめるエコツーリズムの聖地。',
+    highlight:'生物多様性世界トップクラス。野生動物と大自然のアドベンチャーが詰まる。',
+    tags:['エコツーリズム','野生動物','火山','アドベンチャー'], bestTime:'12〜4月', budget:'中程度', duration:'7〜14日',
+    scores:{ style:{nature:3}, climate:{tropical:3}, purpose:{adventure:3,scenery:2,exchange:2}, budget:{moderate:3}, companion:{friends:3,couple:2,solo:2}, occupation:{student:2,freelance:2,worker_young:2} },
+  },
+
+  // ---- AFRICA ----
+  {
+    id:'morocco', name:'モロッコ', country:'🇲🇦 モロッコ', emoji:'🕌',
+    bg:'linear-gradient(135deg,#7c2d12,#9a3412)',
+    desc:'サハラ砂漠のラクダトレッキング、マラケシュのスーク、フェズの迷宮…アフリカ・アラブ・ベルベル文化が混ざり合う唯一無二の旅先。',
+    highlight:'サハラで見る星空は一生忘れない。迷宮都市と砂漠の組み合わせは唯一無二。',
+    tags:['砂漠','異文化','迷宮都市','絶景'], bestTime:'3〜5月、9〜11月', budget:'中程度', duration:'7〜14日',
+    scores:{ style:{culture:3,nature:2}, climate:{mild:2}, purpose:{adventure:3,exchange:3,scenery:2}, budget:{budget:2,moderate:3}, companion:{solo:2,friends:3,couple:2}, occupation:{freelance:3,student:2,worker_young:2} },
+  },
+  {
+    id:'tanzania', name:'タンザニア（セレンゲティ）', country:'🇹🇿 タンザニア', emoji:'🦁',
+    bg:'linear-gradient(135deg,#78350f,#92400e)',
+    desc:'セレンゲティの大草原でライオン・ゾウ・ヒョウ…アフリカの野生動物を間近で見られるサファリ体験。キリマンジャロ登山とザンジバルのビーチも組み合わせ可能。',
+    highlight:'大草原でライオンと目が合う瞬間、その感動は映像では絶対に伝わらない。',
+    tags:['サファリ','野生動物','キリマンジャロ','絶景'], bestTime:'6〜10月（乾季）', budget:'高め', duration:'7〜14日',
+    scores:{ style:{nature:3}, climate:{tropical:2,mild:1}, purpose:{adventure:3,scenery:3,exchange:2}, budget:{luxury:2,moderate:2}, companion:{couple:2,friends:2,solo:2}, occupation:{worker_senior:3,freelance:2,worker_young:2} },
+  },
+  {
+    id:'southafrica', name:'南アフリカ（ケープタウン）', country:'🇿🇦 南アフリカ', emoji:'🐧',
+    bg:'linear-gradient(135deg,#1e40af,#1e3a5f)',
+    desc:'テーブルマウンテン、ケープポイント、喜望峰、ペンギンコロニー、ワイナリー…英語が通じ都市インフラも充実。アフリカ入門に最適な世界屈指の観光都市。',
+    highlight:'喜望峰でアフリカ最南端に立つ。英語OK・ペンギンに会えるアフリカ入門。',
+    tags:['絶景','ワイン','ペンギン','喜望峰'], bestTime:'11〜3月（現地夏）', budget:'中程度', duration:'7〜14日',
+    scores:{ style:{nature:3,culture:1,food:1}, climate:{mild:2}, purpose:{adventure:2,scenery:3,exchange:2}, budget:{moderate:3}, companion:{couple:2,friends:2,solo:2}, occupation:{worker_senior:2,freelance:2,worker_young:2} },
+  },
+  {
+    id:'kenya', name:'ケニア（マサイマラ）', country:'🇰🇪 ケニア', emoji:'🦒',
+    bg:'linear-gradient(135deg,#064e3b,#065f46)',
+    desc:'世界最大の動物の大移動が見られるマサイマラ国立保護区。ビッグファイブ（ライオン、ゾウ、バッファロー、サイ、ヒョウ）に最高の確率で出会える。',
+    highlight:'年に一度の「動物の大移動」は地球最大のドラマ。一生に一度見るべき光景。',
+    tags:['サファリ','動物の大移動','ビッグファイブ','絶景'], bestTime:'7〜10月（大移動）', budget:'高め', duration:'7〜14日',
+    scores:{ style:{nature:3}, climate:{tropical:2,mild:1}, purpose:{adventure:3,scenery:3}, budget:{luxury:2,moderate:2}, companion:{couple:2,friends:2,solo:2}, occupation:{worker_senior:3,freelance:2} },
+  },
+
+  // ---- INDIAN OCEAN ----
+  {
+    id:'maldives', name:'モルディブ', country:'🇲🇻 モルディブ', emoji:'🐠',
+    bg:'linear-gradient(135deg,#0369a1,#0284c7)',
+    desc:'透明度抜群のインド洋に浮かぶ白砂の楽園。水上コテージから海に飛び込む究極のリゾート体験。ハネムーンの聖地として世界的に有名。',
+    highlight:'水上コテージのテラスから直接海へ。これ以上の非日常はないと断言できる。',
+    tags:['水上コテージ','シュノーケル','絶景','ハネムーン'], bestTime:'12〜4月', budget:'高め', duration:'5〜7日',
+    scores:{ style:{beach:3}, climate:{tropical:3}, purpose:{relax:3,scenery:3}, budget:{luxury:3}, companion:{couple:3}, occupation:{worker_senior:3,worker_young:2} },
+  },
+  {
+    id:'mauritius', name:'モーリシャス', country:'🇲🇺 モーリシャス', emoji:'🌸',
+    bg:'linear-gradient(135deg,#0369a1,#0c4a6e)',
+    desc:'インド洋に浮かぶ美しい島国。透明な海とラグーン、高級リゾート、ラム酒、多文化料理…モルディブより自然体験が豊富で本格的なリゾートが楽しめる。',
+    highlight:'モルディブより自然が豊か。ビーチ＋ジャングルトレッキングを同時に楽しめる。',
+    tags:['ビーチ','ラグジュアリー','インド洋','多文化'], bestTime:'5〜11月', budget:'高め', duration:'7〜10日',
+    scores:{ style:{beach:3,nature:2}, climate:{tropical:3}, purpose:{relax:3,scenery:2}, budget:{luxury:3,moderate:2}, companion:{couple:3,friends:2}, occupation:{worker_senior:3,worker_young:2} },
+  },
+
+  // ---- OTHERS ----
+  {
+    id:'india', name:'インド', country:'🇮🇳 インド', emoji:'🕌',
+    bg:'linear-gradient(135deg,#78350f,#d97706)',
+    desc:'タージ・マハル、バラナシのガンジス河、ラジャスタンの宮殿…圧倒的なカオスと神秘が共存する。食も安くバラエティ豊か。人生観が変わる旅先。',
+    highlight:'人生観が変わる衝撃の旅。タージ・マハルの美しさは写真の1000倍リアル。',
+    tags:['異文化','世界遺産','スパイス料理','刺激'], bestTime:'10〜3月', budget:'低め', duration:'7〜21日',
+    scores:{ style:{culture:3,food:2}, climate:{tropical:2}, purpose:{adventure:3,exchange:3}, budget:{budget:3}, companion:{solo:2,friends:2}, occupation:{student:3,freelance:3} },
+  },
+  {
+    id:'egypt', name:'エジプト（カイロ・ルクソール）', country:'🇪🇬 エジプト', emoji:'🐪',
+    bg:'linear-gradient(135deg,#92400e,#b45309)',
+    desc:'ギザのピラミッド、スフィンクス、ルクソールの神殿群…人類史4500年の遺産が砂漠に屹立する。ナイル川クルーズで悠久の歴史をたどる旅。',
+    highlight:'4500年前のピラミッドを目の前に。人類最大の建造物の前では言葉を失う。',
+    tags:['ピラミッド','世界遺産','ナイル川','古代文明'], bestTime:'10〜4月', budget:'低め', duration:'7〜14日',
+    scores:{ style:{culture:3,nature:1}, climate:{tropical:2,mild:1}, purpose:{adventure:2,scenery:3,exchange:2}, budget:{budget:3,moderate:2}, companion:{friends:2,couple:2,solo:2}, occupation:{student:2,freelance:2,worker_young:2} },
   },
 ];
 
-// ========== STATE ==========
+// ===== STATE =====
 let currentStep = 0;
 const answers = {};
 
-// ========== SCORING ==========
+// ===== SCORING =====
 function calcScores() {
   return DESTINATIONS.map(dest => {
     let score = 0;
@@ -844,35 +763,70 @@ function calcScores() {
   }).sort((a, b) => b.score - a.score);
 }
 
-// ========== RENDER ==========
+// ===== RECOMMENDATION REASON =====
+function buildReason(dest, ans) {
+  const parts = [];
+
+  // Style match
+  const styleMap = { beach:'ビーチ好き', culture:'文化・歴史好き', nature:'自然・アドベンチャー好き', food:'グルメ好き' };
+  if (dest.scores.style?.[ans.style] >= 2) parts.push(`${styleMap[ans.style]}のあなたに最適な旅先`);
+
+  // Climate
+  const climateMap = { tropical:'常夏の気候', mild:'過ごしやすい温暖な気候', cold:'涼しい気候', seasonal:'四季折々の景色' };
+  if (dest.scores.climate?.[ans.climate] >= 2) parts.push(`${climateMap[ans.climate]}が楽しめる`);
+
+  // Purpose
+  const purposeMap = { relax:'ゆっくりリラックスできる', adventure:'スリル満点のアドベンチャーが待つ', scenery:'SNS映え抜群の絶景スポット', exchange:'現地文化との深い交流ができる' };
+  if (dest.scores.purpose?.[ans.purpose] >= 2) parts.push(`${purposeMap[ans.purpose]}`);
+
+  // Budget
+  const budgetMap = { budget:'コスパ最強で財布に優しい', moderate:'コストと体験のバランスが優秀', luxury:'贅を尽くした最高の体験ができる' };
+  if (dest.scores.budget?.[ans.budget] >= 2) parts.push(`${budgetMap[ans.budget]}`);
+
+  // Companion
+  const compMap = { solo:'一人旅でも動きやすい環境', couple:'カップルに人気のロマンチックな旅先', family:'子連れでも安心・充実の旅先', friends:'友人グループで盛り上がれる' };
+  if (dest.scores.companion?.[ans.companion] >= 2) parts.push(`${compMap[ans.companion]}`);
+
+  // Occupation
+  const occMap = {
+    student: '学生の長期休暇を最大限に活かせる',
+    worker_young: '限られた有休でも十分満喫できる',
+    worker_senior: '質にこだわる大人の旅に最高の舞台',
+    freelance: '自分のペースで自由に旅せる環境',
+    homemaker: '家族や自分へのご褒美旅行に最適',
+  };
+  if (dest.scores.occupation?.[ans.occupation] >= 2) parts.push(`${occMap[ans.occupation]}`);
+
+  if (parts.length === 0) return dest.highlight;
+
+  // Pick top 2 reasons + highlight
+  return `${parts.slice(0,2).join('。')}。${dest.highlight}`;
+}
+
+// ===== RENDER =====
 function renderQuestion() {
   const q = QUESTIONS[currentStep];
-  const cols = q.options.length === 3 ? 'cols-3' : '';
+  const colsClass = q.options.length === 3 ? 'cols-3' : q.options.length === 5 ? 'cols-5' : '';
 
   document.getElementById('step-label').textContent = `質問 ${currentStep + 1} / ${QUESTIONS.length}`;
   document.getElementById('progress-fill').style.width = `${(currentStep / QUESTIONS.length) * 100}%`;
   document.getElementById('btn-back').style.visibility = currentStep === 0 ? 'hidden' : 'visible';
 
   const selected = answers[q.id];
-
   document.getElementById('question-card').innerHTML = `
     <div class="q-icon">${q.icon}</div>
     <div class="q-text">${q.text}</div>
     <div class="q-hint">${q.hint}</div>
-    <div class="options-grid ${cols}">
+    <div class="options-grid ${colsClass}">
       ${q.options.map(opt => `
-        <button
-          class="option-btn ${selected === opt.value ? 'selected' : ''}"
-          onclick="selectOption('${q.id}', '${opt.value}', this)"
-        >
+        <button class="option-btn ${selected === opt.value ? 'selected' : ''}"
+          onclick="selectOption('${q.id}','${opt.value}',this)">
           <span class="option-emoji">${opt.emoji}</span>
           <span class="option-label">${opt.label}</span>
           <span class="option-desc">${opt.desc}</span>
-        </button>
-      `).join('')}
+        </button>`).join('')}
     </div>
   `;
-
   updateNextBtn();
 }
 
@@ -896,23 +850,15 @@ function prevStep() {
 }
 
 function nextStep() {
-  const q = QUESTIONS[currentStep];
-  if (!answers[q.id]) return;
-  if (currentStep < QUESTIONS.length - 1) {
-    currentStep++;
-    renderQuestion();
-  } else {
-    showLoading();
-  }
+  if (!answers[QUESTIONS[currentStep].id]) return;
+  if (currentStep < QUESTIONS.length - 1) { currentStep++; renderQuestion(); }
+  else showLoading();
 }
 
-// ========== SCREENS ==========
+// ===== SCREENS =====
 function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => {
-    s.style.display = 'none';
-  });
-  const el = document.getElementById(id);
-  el.style.display = 'flex';
+  document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
+  document.getElementById(id).style.display = 'flex';
 }
 
 function startQuiz() {
@@ -923,31 +869,28 @@ function startQuiz() {
 
 function showLoading() {
   showScreen('screen-loading');
-  setTimeout(showResult, 2200);
+  setTimeout(showResult, 2400);
 }
 
 function showResult() {
   const ranked = calcScores();
   const top3 = ranked.slice(0, 3);
-
-  const rankLabels = ['gold', 'silver', 'bronze'];
-  const rankEmoji  = ['🥇 第1位', '🥈 第2位', '🥉 第3位'];
+  const rankLabels = ['gold','silver','bronze'];
+  const rankEmoji  = ['🥇 第1位','🥈 第2位','🥉 第3位'];
 
   const styleLabel = { beach:'ビーチ派', culture:'文化探求派', nature:'自然・冒険派', food:'グルメ派' };
-  const purposeLabel = { relax:'のんびり派', adventure:'アドベンチャー派', scenery:'絶景ハンター', exchange:'交流派' };
-
-  const styleName  = styleLabel[answers.style] || '';
-  const purposeName = purposeLabel[answers.purpose] || '';
+  const occLabel = { student:'学生', worker_young:'社会人（若手）', worker_senior:'社会人（ベテラン）', freelance:'フリーランス', homemaker:'主婦・主夫' };
   document.getElementById('result-summary').textContent =
-    `あなたの旅スタイル：${styleName}・${purposeName} — 相性抜群の旅先トップ3をご提案します！`;
+    `${styleLabel[answers.style] || ''}・${occLabel[answers.occupation] || ''} のあなたへ — 50の旅行先からトップ3をご提案します！`;
 
   document.getElementById('results-grid').innerHTML = top3.map((item, i) => {
     const d = item.dest;
-    const matchPct = Math.min(100, Math.round((item.score / 9) * 100));
+    const matchPct = Math.min(100, Math.round((item.score / 12) * 100));
+    const reason = buildReason(d, answers);
     return `
       <div class="dest-card">
         <div class="dest-banner" style="background:${d.bg}">
-          <span style="font-size:72px">${d.emoji}</span>
+          <span style="font-size:64px">${d.emoji}</span>
           <div class="rank-badge ${rankLabels[i]}">${rankEmoji[i]}</div>
           <div class="match-badge">マッチ度 ${matchPct}%</div>
         </div>
@@ -955,26 +898,18 @@ function showResult() {
           <div class="dest-name">${d.name}</div>
           <div class="dest-country">${d.country}</div>
           <div class="dest-desc">${d.desc}</div>
-          <div class="dest-tags">
-            ${d.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+          <div class="reason-box">
+            <strong>💡 あなたにおすすめの理由</strong>
+            ${reason}
           </div>
+          <div class="dest-tags">${d.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
           <div class="dest-meta">
-            <div class="meta-item">
-              <span class="meta-label">🗓 ベストシーズン</span>
-              <span class="meta-value">${d.bestTime}</span>
-            </div>
-            <div class="meta-item">
-              <span class="meta-label">💰 予算目安</span>
-              <span class="meta-value">${d.budget}</span>
-            </div>
-            <div class="meta-item">
-              <span class="meta-label">📅 推奨日数</span>
-              <span class="meta-value">${d.duration}</span>
-            </div>
+            <div class="meta-item"><span class="meta-label">🗓 ベストシーズン</span><span class="meta-value">${d.bestTime}</span></div>
+            <div class="meta-item"><span class="meta-label">💰 予算目安</span><span class="meta-value">${d.budget}</span></div>
+            <div class="meta-item"><span class="meta-label">📅 推奨日数</span><span class="meta-value">${d.duration}</span></div>
           </div>
         </div>
-      </div>
-    `;
+      </div>`;
   }).join('');
 
   showScreen('screen-result');
