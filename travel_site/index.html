@@ -45,6 +45,7 @@
       content: '';
       position: absolute;
       inset: 0;
+      pointer-events: none;
       background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='30' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E") repeat;
     }
     .hero-emoji { font-size: 80px; margin-bottom: 20px; animation: float 3s ease-in-out infinite; }
@@ -167,7 +168,7 @@
   <p class="hero-sub">いくつかの質問に答えるだけで、あなたの好みや旅スタイルに合った海外旅行先をご提案します。</p>
   <button class="btn-primary" onclick="startQuiz()">診断スタート →</button>
   <div class="hero-badges">
-    <span class="badge">🌍 50の旅行先から診断</span>
+    <span class="badge">🌍 約70の旅行先から診断</span>
     <span class="badge">❓ 7つの質問</span>
     <span class="badge">⚡ 約2分で完了</span>
   </div>
@@ -190,7 +191,7 @@
 <section id="screen-loading" class="screen">
   <span class="loading-globe">🌐</span>
   <h2>旅先を診断中…</h2>
-  <p style="margin-bottom:24px">50の旅行先からあなたにぴったりを探しています</p>
+  <p style="margin-bottom:24px">約70の旅行先からあなたにぴったりを探しています</p>
   <div class="loading-dots"><span></span><span></span><span></span></div>
 </section>
 
@@ -742,6 +743,166 @@ const DESTINATIONS = [
     highlight:'4500年前のピラミッドを目の前に。人類最大の建造物の前では言葉を失う。',
     tags:['ピラミッド','世界遺産','ナイル川','古代文明'], bestTime:'10〜4月', budget:'低め', duration:'7〜14日',
     scores:{ style:{culture:3,nature:1}, climate:{tropical:2,mild:1}, purpose:{adventure:2,scenery:3,exchange:2}, budget:{budget:3,moderate:2}, companion:{friends:2,couple:2,solo:2}, occupation:{student:2,freelance:2,worker_young:2} },
+  },
+
+  // ---- CENTRAL ASIA ----
+  {
+    id:'kazakhstan', name:'カザフスタン（アルマティ）', country:'🇰🇿 カザフスタン', emoji:'🐎',
+    bg:'linear-gradient(135deg,#065f46,#047857)',
+    desc:'天山山脈に抱かれた旧首都アルマティ、シルクロードの古都トルケスタン、そして宇宙都市バイコヌール…中央アジアの雄大なステップとノマド文化が旅人を魅了する。',
+    highlight:'シルクロードの風が今も吹く秘境。馬上で草原を駆ける体験は他では絶対にできない。',
+    tags:['シルクロード','ステップ','遊牧民','秘境'], bestTime:'5〜9月', budget:'低め', duration:'7〜14日',
+    scores:{ style:{culture:3,nature:3}, climate:{cold:2,seasonal:2}, purpose:{adventure:3,exchange:3,scenery:2}, budget:{budget:3}, companion:{solo:3,friends:2,couple:1}, occupation:{freelance:3,student:3,worker_young:2} },
+  },
+
+  // ---- MEDITERRANEAN ----
+  {
+    id:'cyprus', name:'キプロス', country:'🇨🇾 キプロス', emoji:'🏺',
+    bg:'linear-gradient(135deg,#1e40af,#0369a1)',
+    desc:'地中海で3番目に大きな島。アフロディーテ生誕の地とされる神話の海岸、パフォスの世界遺産モザイク、碧く輝くアヤナパのビーチが旅人を迎える。',
+    highlight:'ギリシャ文明とビーチが同時に楽しめる隠れた地中海の宝石。知名度低めで穴場。',
+    tags:['地中海','ビーチ','世界遺産','穴場'], bestTime:'4〜11月', budget:'中程度', duration:'5〜10日',
+    scores:{ style:{beach:3,culture:2}, climate:{mild:3,tropical:1}, purpose:{relax:3,scenery:2,exchange:2}, budget:{moderate:3}, companion:{couple:3,friends:2,solo:2}, occupation:{worker_young:2,worker_senior:2,freelance:2} },
+  },
+
+  // ---- EAST AFRICA ----
+  {
+    id:'uganda', name:'ウガンダ（ブウィンディ）', country:'🇺🇬 ウガンダ', emoji:'🦍',
+    bg:'linear-gradient(135deg,#064e3b,#065f46)',
+    desc:'「アフリカの真珠」。ブウィンディ密林でのマウンテンゴリラ・トレッキング、ナイル川の源流ムチソンフォールズ、赤道直下の豊かな生態系…野生王国の最高峰。',
+    highlight:'野生のゴリラと目が合う瞬間。地球上で最も感動的な野生動物体験のひとつ。',
+    tags:['ゴリラ','サファリ','ナイル源流','秘境'], bestTime:'6〜9月、12〜2月', budget:'高め', duration:'7〜14日',
+    scores:{ style:{nature:3}, climate:{tropical:2,mild:1}, purpose:{adventure:3,scenery:3,exchange:2}, budget:{luxury:2,moderate:2}, companion:{friends:2,couple:2,solo:2}, occupation:{freelance:3,worker_senior:2,student:2} },
+  },
+
+  // ---- EUROPE (additional) ----
+  {
+    id:'sweden', name:'スウェーデン（ストックホルム）', country:'🇸🇪 スウェーデン', emoji:'👑',
+    bg:'linear-gradient(135deg,#1e3a5f,#1e40af)',
+    desc:'水の都ストックホルム、ABBAミュージアム、北欧デザイン、世界最高水準の福祉社会…14の島に架かる橋で繋がる美しい街並みと、ラップランドのオーロラも楽しめる。',
+    highlight:'北欧デザインの発祥地。シンプルで美しい暮らしぶりに生き方のヒントが見つかる。',
+    tags:['北欧デザイン','オーロラ','ABBA','水の都'], bestTime:'6〜8月（夏）、12〜3月（オーロラ）', budget:'高め', duration:'5〜10日',
+    scores:{ style:{culture:2,nature:2}, climate:{cold:2,seasonal:2}, purpose:{scenery:2,relax:2,exchange:2}, budget:{luxury:2,moderate:2}, companion:{couple:2,solo:2,friends:2}, occupation:{freelance:2,worker_senior:2,worker_young:2} },
+  },
+  {
+    id:'denmark', name:'デンマーク（コペンハーゲン）', country:'🇩🇰 デンマーク', emoji:'🧜',
+    bg:'linear-gradient(135deg,#7f1d1d,#b91c1c)',
+    desc:'世界一幸せな国民のルーツを探る旅。カラフルなニューハウン運河、世界最高峰のレストランNoma、ヒュッゲ（居心地よさ）の文化、チボリ公園の夜景が待つ。',
+    highlight:'「ヒュッゲ」という幸せな時間の過ごし方を体感できる、世界一豊かな国の首都。',
+    tags:['ヒュッゲ','グルメ','デザイン','童話'], bestTime:'5〜8月', budget:'高め', duration:'3〜7日',
+    scores:{ style:{culture:2,food:2}, climate:{mild:2,seasonal:2}, purpose:{relax:3,exchange:2,scenery:2}, budget:{luxury:2,moderate:2}, companion:{couple:3,solo:2,friends:2}, occupation:{worker_senior:3,freelance:2,worker_young:2} },
+  },
+  {
+    id:'belgium', name:'ベルギー（ブリュージュ）', country:'🇧🇪 ベルギー', emoji:'🍺',
+    bg:'linear-gradient(135deg,#78350f,#92400e)',
+    desc:'「北のヴェネツィア」ブリュージュの中世運河、ベルギービール500種類以上、チョコレート、ワッフル…食と中世建築の宝庫。ブリュッセルの原子力モニュメントも面白い。',
+    highlight:'ビール・チョコ・ワッフルの聖地。中世の街並みを食べ歩きするだけで最高の旅。',
+    tags:['ビール','チョコ','中世建築','グルメ'], bestTime:'4〜9月', budget:'中程度', duration:'3〜7日',
+    scores:{ style:{culture:3,food:3}, climate:{mild:2,seasonal:2}, purpose:{exchange:2,scenery:2,relax:2}, budget:{moderate:3}, companion:{couple:2,friends:3,solo:2}, occupation:{student:2,worker_young:2,freelance:2} },
+  },
+  {
+    id:'estonia', name:'エストニア（タリン）', country:'🇪🇪 エストニア', emoji:'🏰',
+    bg:'linear-gradient(135deg,#0c4a6e,#075985)',
+    desc:'中世の城壁と石畳がそのまま残るタリン旧市街は世界遺産。世界最高水準のデジタル国家でありながら、中世の空気が生きている矛盾が魅力的な北欧の小国。',
+    highlight:'中世の城壁都市が世界一デジタルな国にある。この矛盾が旅心をくすぐる最高の穴場。',
+    tags:['世界遺産','中世','デジタル先進国','穴場'], bestTime:'5〜9月', budget:'低め', duration:'3〜7日',
+    scores:{ style:{culture:3}, climate:{seasonal:2,cold:1}, purpose:{scenery:3,exchange:2}, budget:{budget:3,moderate:2}, companion:{couple:2,solo:3,friends:2}, occupation:{freelance:3,student:3,worker_young:2} },
+  },
+  {
+    id:'latvia', name:'ラトビア（リガ）', country:'🇱🇻 ラトビア', emoji:'🌲',
+    bg:'linear-gradient(135deg,#7f1d1d,#991b1b)',
+    desc:'バルト海に面したアール・ヌーヴォー建築の都リガ。旧市街は世界遺産で、ヨーロッパで最も美しいアール・ヌーヴォー建築が800棟以上残る知られざる名都。',
+    highlight:'欧州屈指のアール・ヌーヴォー建築が奇跡的に残る穴場の世界遺産都市。',
+    tags:['世界遺産','アール・ヌーヴォー','バルト海','穴場'], bestTime:'5〜9月', budget:'低め', duration:'3〜5日',
+    scores:{ style:{culture:3}, climate:{seasonal:2,cold:1}, purpose:{scenery:2,exchange:2}, budget:{budget:3}, companion:{solo:2,couple:2,friends:2}, occupation:{student:3,freelance:2,worker_young:2} },
+  },
+  {
+    id:'lithuania', name:'リトアニア（ヴィリニュス）', country:'🇱🇹 リトアニア', emoji:'⛪',
+    bg:'linear-gradient(135deg,#065f46,#064e3b)',
+    desc:'バロック建築の宝庫ヴィリニュス旧市街、杉原千畝が多くのユダヤ人を救った地、十字架の丘…ヨーロッパで最もゆったりした時間が流れるバルト三国の最南端。',
+    highlight:'杉原千畝の地。バロック建築と深い歴史が混在する、まだ混んでいない穴場の古都。',
+    tags:['バロック建築','歴史','穴場','杉原千畝'], bestTime:'5〜9月', budget:'低め', duration:'3〜5日',
+    scores:{ style:{culture:3}, climate:{seasonal:2,cold:1}, purpose:{exchange:3,scenery:2}, budget:{budget:3}, companion:{solo:2,couple:2,friends:2}, occupation:{student:3,freelance:2} },
+  },
+  {
+    id:'slovakia', name:'スロバキア（ブラチスラバ）', country:'🇸🇰 スロバキア', emoji:'🏯',
+    bg:'linear-gradient(135deg,#1e1b4b,#3730a3)',
+    desc:'ドナウ川沿いの小さな首都ブラチスラバ。プラハ・ウィーンから日帰りも可能な立地で、丘の上に聳えるブラチスラバ城、旧市街のアンティーク感が魅力の穴場。',
+    highlight:'ウィーン・プラハから近いのに観光客が少ない穴場。丘の上の城からドナウ川が絶景。',
+    tags:['穴場','中世城','ドナウ川','コスパ◎'], bestTime:'4〜10月', budget:'低め', duration:'2〜5日',
+    scores:{ style:{culture:2}, climate:{seasonal:2}, purpose:{scenery:2,relax:2}, budget:{budget:3}, duration:{short:3}, companion:{couple:2,friends:2,solo:2}, occupation:{student:3,worker_young:2,freelance:2} },
+  },
+  {
+    id:'slovenia', name:'スロベニア（レッド湖）', country:'🇸🇮 スロベニア', emoji:'🏔️',
+    bg:'linear-gradient(135deg,#064e3b,#065f46)',
+    desc:'エメラルドグリーンのブレッド湖、湖中に浮かぶ教会、周囲をアルプスに囲まれた絵本のような絶景。ヨーロッパで最も知られていない美しい国のひとつ。',
+    highlight:'まるで絵本から飛び出したような湖の風景。欧州最後の穴場といわれる奇跡の絶景。',
+    tags:['ブレッド湖','絶景','アルプス','穴場'], bestTime:'5〜9月', budget:'中程度', duration:'3〜7日',
+    scores:{ style:{nature:3,beach:1}, climate:{mild:2,seasonal:2}, purpose:{scenery:3,relax:2}, budget:{moderate:3}, companion:{couple:3,solo:2,friends:2}, occupation:{freelance:2,worker_young:2,couple:3,student:2} },
+  },
+  {
+    id:'romania', name:'ルーマニア（トランシルヴァニア）', country:'🇷🇴 ルーマニア', emoji:'🧛',
+    bg:'linear-gradient(135deg,#7f1d1d,#b91c1c)',
+    desc:'ドラキュラ伝説の地ブラン城、世界遺産の彩色修道院、シギショアラの中世要塞都市…東欧で最も個性的で物語に満ちた国。カルパチア山脈の紅葉も圧巻。',
+    highlight:'ドラキュラ城と中世の要塞都市。欧州で最もゴシックで物語的な旅ができる。',
+    tags:['ドラキュラ','中世','世界遺産','コスパ◎'], bestTime:'5〜10月', budget:'低め', duration:'5〜10日',
+    scores:{ style:{culture:3,nature:2}, climate:{seasonal:3}, purpose:{adventure:2,scenery:3,exchange:2}, budget:{budget:3}, companion:{friends:3,couple:2,solo:2}, occupation:{student:3,freelance:2,worker_young:2} },
+  },
+  {
+    id:'bulgaria', name:'ブルガリア（ソフィア・プロヴディフ）', country:'🇧🇬 ブルガリア', emoji:'🌹',
+    bg:'linear-gradient(135deg,#166534,#15803d)',
+    desc:'バラの谷で有名なカザンラク、2000年の歴史を持つプロヴディフ旧市街、黒海のリゾート…欧州最安クラスの物価でギリシャ以上のビーチと歴史が楽しめる穴場。',
+    highlight:'欧州最安クラスのコスパでビーチと遺跡が両立。知られていないのが信じられない。',
+    tags:['バラ','黒海','穴場','コスパ◎'], bestTime:'5〜9月', budget:'低め', duration:'5〜10日',
+    scores:{ style:{culture:2,beach:2,nature:1}, climate:{mild:2,seasonal:2}, purpose:{relax:2,scenery:2,exchange:2}, budget:{budget:3}, companion:{couple:2,friends:3,solo:2}, occupation:{student:3,freelance:2,worker_young:2} },
+  },
+  {
+    id:'serbia', name:'セルビア（ベオグラード）', country:'🇷🇸 セルビア', emoji:'🎸',
+    bg:'linear-gradient(135deg,#7c2d12,#9a3412)',
+    desc:'ドナウ川とサバ川の合流点に立つカレメグダン要塞、欧州屈指のナイトライフ、激安の食と酒…バルカン半島の中心都市は「欧州で最も熱い街」として若者に人気急上昇。',
+    highlight:'欧州最安の物価で最高のナイトライフ。旅好きの間で「知る人ぞ知る」熱い街。',
+    tags:['ナイトライフ','要塞','コスパ◎','バルカン'], bestTime:'4〜10月', budget:'低め', duration:'3〜7日',
+    scores:{ style:{culture:2,food:2}, climate:{seasonal:2,mild:2}, purpose:{exchange:3,relax:2}, budget:{budget:3}, companion:{friends:3,solo:2,couple:2}, occupation:{student:3,freelance:3,worker_young:2} },
+  },
+  {
+    id:'albania', name:'アルバニア（アルバニアン・リビエラ）', country:'🇦🇱 アルバニア', emoji:'🌊',
+    bg:'linear-gradient(135deg,#0369a1,#0c4a6e)',
+    desc:'「欧州最後の秘境」と呼ばれる地中海の隠れた楽園。透明度抜群のイオニア海ビーチ、古都ベラト（世界遺産）、圧倒的なコスパ…10年後には混むと言われる今行くべき旅先。',
+    highlight:'欧州最安値のビーチリゾート。10年後には必ず混む「今が旬」の秘境。',
+    tags:['秘境','ビーチ','コスパ最強','穴場'], bestTime:'6〜9月', budget:'低め', duration:'5〜10日',
+    scores:{ style:{beach:3,culture:2,nature:2}, climate:{mild:3,tropical:1}, purpose:{relax:3,scenery:3,adventure:2}, budget:{budget:3}, companion:{friends:3,couple:2,solo:3}, occupation:{student:3,freelance:3,worker_young:2} },
+  },
+  {
+    id:'montenegro', name:'モンテネグロ（コトル）', country:'🇲🇪 モンテネグロ', emoji:'⛵',
+    bg:'linear-gradient(135deg,#1e3a5f,#0369a1)',
+    desc:'「黒い山」の意を持つ小国に広がる世界遺産コトル湾、中世の城壁都市、峡湾のような絶景…アドリア海に面した欧州最小クラスの国に凝縮された驚きの美しさ。',
+    highlight:'欧州最小の国に詰め込まれた絶景の密度は異常。コトル湾は世界で最も美しい湾のひとつ。',
+    tags:['世界遺産','絶景','コトル湾','穴場'], bestTime:'5〜10月', budget:'中程度', duration:'3〜7日',
+    scores:{ style:{beach:2,culture:2,nature:2}, climate:{mild:3}, purpose:{scenery:3,relax:2}, budget:{moderate:2,budget:2}, companion:{couple:3,friends:2,solo:2}, occupation:{freelance:2,worker_young:2,worker_senior:2} },
+  },
+  {
+    id:'malta', name:'マルタ', country:'🇲🇹 マルタ', emoji:'🛡️',
+    bg:'linear-gradient(135deg,#92400e,#b45309)',
+    desc:'騎士団の砦ヴァレッタ（世界遺産）、青の洞門、透明度抜群の地中海…地中海の中心に位置するヨーロッパ最小の国のひとつ。英語が公用語で旅しやすく、歴史密度は欧州最高峰。',
+    highlight:'英語OK・世界遺産の首都・碧い海の三拍子。欧州で最もコンパクトに歴史が詰まった島。',
+    tags:['世界遺産','英語圏','地中海','騎士団'], bestTime:'4〜10月', budget:'中程度', duration:'3〜7日',
+    scores:{ style:{culture:3,beach:2}, climate:{mild:3,tropical:1}, purpose:{scenery:2,exchange:2,relax:2}, budget:{moderate:3}, companion:{couple:2,friends:2,solo:2}, occupation:{worker_senior:2,worker_young:2,freelance:2} },
+  },
+  {
+    id:'bosnia', name:'ボスニア（モスタル）', country:'🇧🇦 ボスニア・ヘルツェゴビナ', emoji:'🌉',
+    bg:'linear-gradient(135deg,#1e3a5f,#1e40af)',
+    desc:'スタリ・モストの石橋（世界遺産）が青緑のネレトヴァ川に映える絶景の街モスタル。イスラムとキリスト教が混在するオスマン帝国の香り漂う、欧州で最もエキゾチックな街。',
+    highlight:'川に映えるオスマン時代の石橋は欧州で最もエキゾチックな絶景。歴史の重みを感じる。',
+    tags:['世界遺産','石橋','オスマン文化','穴場'], bestTime:'4〜10月', budget:'低め', duration:'3〜7日',
+    scores:{ style:{culture:3}, climate:{mild:2,seasonal:1}, purpose:{scenery:3,exchange:3}, budget:{budget:3}, companion:{couple:2,friends:2,solo:2}, occupation:{student:2,freelance:2,worker_young:2} },
+  },
+  {
+    id:'northmacedonia', name:'北マケドニア（オフリド）', country:'🇲🇰 北マケドニア', emoji:'🏛️',
+    bg:'linear-gradient(135deg,#7c2d12,#9a3412)',
+    desc:'「バルカンのエルサレム」オフリド湖畔には365の教会と世界遺産の旧市街。欧州で最も古いビザンツ教会、ロマン・ポランスキー監督も絶賛した美しき湖の街。',
+    highlight:'365の教会が湖畔に並ぶ「バルカンのエルサレム」。観光客が少ない今だけの奇跡的静寂。',
+    tags:['世界遺産','湖','ビザンツ建築','超穴場'], bestTime:'5〜9月', budget:'低め', duration:'3〜7日',
+    scores:{ style:{culture:3,nature:2}, climate:{mild:2,seasonal:2}, purpose:{scenery:3,exchange:2}, budget:{budget:3}, companion:{solo:2,couple:2,friends:2}, occupation:{student:3,freelance:3} },
   },
 ];
 
