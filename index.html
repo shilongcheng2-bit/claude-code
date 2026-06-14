@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上野 飲み屋ランキング | Ueno Bar Ranking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🍺 2026年版</div>
+      <h1>上野 飲み屋<br><span>ランキング</span></h1>
+      <p class="hero-sub">地元民が選ぶ！上野エリア最強の飲み屋20選</p>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">20</span><span class="stat-label">店舗掲載</span></div>
+        <div class="stat"><span class="stat-num">4.2+</span><span class="stat-label">平均評価</span></div>
+        <div class="stat"><span class="stat-num">5</span><span class="stat-label">ジャンル</span></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sticky-nav">
+    <div class="container">
+      <div class="filter-row">
+        <div class="filter-group">
+          <label>ジャンル</label>
+          <div class="filter-buttons" id="genreFilter">
+            <button class="filter-btn active" data-filter="all">すべて</button>
+            <button class="filter-btn" data-filter="izakaya">居酒屋</button>
+            <button class="filter-btn" data-filter="yakitori">焼き鳥</button>
+            <button class="filter-btn" data-filter="seafood">海鮮</button>
+            <button class="filter-btn" data-filter="beer">ビアホール</button>
+            <button class="filter-btn" data-filter="standing">立ち飲み</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <label>並び替え</label>
+          <select id="sortSelect">
+            <option value="rank">ランキング順</option>
+            <option value="rating">評価が高い順</option>
+            <option value="price-asc">価格が低い順</option>
+            <option value="price-desc">価格が高い順</option>
+          </select>
+        </div>
+        <div class="search-group">
+          <input type="text" id="searchInput" placeholder="🔍 店名・キーワードで検索">
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="results-info">
+      <span id="resultsCount">20件</span>を表示中
+    </div>
+
+    <div class="ranking-list" id="rankingList">
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 上野飲み屋ランキング｜情報は最新のものを記載するよう努めていますが、変更になる場合があります。</p>
+      <p>掲載情報の追加・修正はお気軽にご連絡ください。</p>
+    </div>
+  </footer>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
